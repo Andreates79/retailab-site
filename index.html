@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retailab — AI applicata al retail</title>
+<meta name="description" content="La piattaforma dove il retail incontra l'intelligenza artificiale. Tool, community e formazione per chi lavora nel settore.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300&family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0c0b09;
+    --bg2: #141210;
+    --cream: #f0ead8;
+    --cream-muted: #a09880;
+    --accent: #c95f28;
+    --accent-light: #e87040;
+    --border: rgba(240,234,216,0.1);
+    --font-display: 'Fraunces', serif;
+    --font-ui: 'Syne', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--cream);
+    font-family: var(--font-ui);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(12,11,9,0.95), transparent);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--cream);
+    letter-spacing: -0.5px;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-cta {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .nav-cta:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 40%, rgba(201,95,40,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,95,40,0.06) 0%, transparent 60%);
+  }
+
+  .hero-tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(52px, 7vw, 96px);
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -2px;
+    max-width: 900px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 0.4s;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--cream-muted);
+  }
+
+  .hero-sub {
+    margin-top: 32px;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--cream-muted);
+    max-width: 520px;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 0.6s;
+  }
+
+  .hero-actions {
+    margin-top: 48px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 0.8s;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--cream);
+    padding: 16px 32px;
+    font-family: var(--font-ui);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary:hover { background: var(--accent-light); transform: translateY(-1px); }
+
+  .hero-scroll {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cream-muted);
+  }
+
+  /* ── SEZIONE GENERICA ── */
+  section {
+    padding: 100px 40px;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    max-width: 700px;
+  }
+
+  .section-title em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--cream-muted);
+  }
+
+  /* ── PER CHI ── */
+  .perchi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-top: 60px;
+    border: 1px solid var(--border);
+  }
+
+  .perchi-card {
+    background: var(--bg);
+    padding: 40px 32px;
+    transition: background 0.2s;
+  }
+
+  .perchi-card:hover { background: var(--bg2); }
+
+  .perchi-num {
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--accent);
+    opacity: 0.4;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .perchi-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .perchi-card p {
+    font-size: 15px;
+    color: var(--cream-muted);
+    line-height: 1.6;
+  }
+
+  /* ── OGGI ── */
+  .oggi-wrap {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .oggi-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: rgba(201,95,40,0.15);
+    color: var(--accent-light);
+    border: 1px solid rgba(201,95,40,0.3);
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-bottom: 24px;
+  }
+
+  .oggi-title {
+    font-family: var(--font-display);
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+  }
+
+  .oggi-desc {
+    font-size: 16px;
+    color: var(--cream-muted);
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+
+  .oggi-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .oggi-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    color: var(--cream-muted);
+  }
+
+  .oggi-features li::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .oggi-visual {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 32px;
+    aspect-ratio: 4/3;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+  }
+
+  .mock-row {
+    height: 10px;
+    border-radius: 2px;
+    background: rgba(240,234,216,0.08);
+  }
+
+  .mock-row.accent { background: rgba(201,95,40,0.25); width: 60%; }
+  .mock-row.short { width: 40%; }
+  .mock-row.med { width: 75%; }
+
+  .mock-header {
+    height: 36px;
+    border-radius: 2px;
+    background: rgba(240,234,216,0.05);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    gap: 8px;
+  }
+
+  .mock-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(201,95,40,0.5);
+  }
+
+  .mock-line {
+    height: 8px;
+    border-radius: 2px;
+    background: rgba(240,234,216,0.12);
+    width: 120px;
+  }
+
+  /* ── ROADMAP ── */
+  .roadmap-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 60px;
+  }
+
+  .roadmap-item {
+    background: var(--bg);
+    padding: 36px 28px;
+    position: relative;
+  }
+
+  .roadmap-item.coming {
+    opacity: 0.5;
+  }
+
+  .roadmap-status {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .roadmap-status.live { color: #4ade80; }
+  .roadmap-status.soon { color: var(--accent-light); }
+  .roadmap-status.future { color: var(--cream-muted); }
+
+  .roadmap-item h3 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+
+  .roadmap-item p {
+    font-size: 14px;
+    color: var(--cream-muted);
+    line-height: 1.6;
+  }
+
+  /* ── EMAIL ── */
+  .email-section {
+    background: var(--bg2);
+    text-align: center;
+    padding: 120px 40px;
+  }
+
+  .email-section .section-title {
+    margin: 0 auto 16px;
+    max-width: 600px;
+  }
+
+  .email-section .section-sub {
+    font-size: 17px;
+    color: var(--cream-muted);
+    max-width: 480px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+  }
+
+  .email-form {
+    display: flex;
+    gap: 0;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .email-input {
+    flex: 1;
+    background: rgba(240,234,216,0.06);
+    border: 1px solid var(--border);
+    border-right: none;
+    color: var(--cream);
+    font-family: var(--font-ui);
+    font-size: 15px;
+    padding: 16px 20px;
+    outline: none;
+    border-radius: 2px 0 0 2px;
+    transition: border-color 0.2s;
+  }
+
+  .email-input::placeholder { color: var(--cream-muted); }
+  .email-input:focus { border-color: var(--accent); }
+
+  .email-btn {
+    background: var(--accent);
+    color: var(--cream);
+    border: none;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 16px 28px;
+    cursor: pointer;
+    border-radius: 0 2px 2px 0;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+
+  .email-btn:hover { background: var(--accent-light); }
+
+  .email-note {
+    font-size: 12px;
+    color: var(--cream-muted);
+    margin-top: 16px;
+    opacity: 0.7;
+  }
+
+  .email-success {
+    display: none;
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-style: italic;
+    color: var(--cream);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 40px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: var(--cream-muted);
+  }
+
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--cream);
+  }
+
+  .footer-logo span { color: var(--accent); }
+
+  /* ── ANIMAZIONI ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .hero { padding: 0 24px 60px; }
+    section { padding: 72px 24px; }
+    .perchi-grid { grid-template-columns: 1fr; }
+    .oggi-wrap { grid-template-columns: 1fr; gap: 40px; }
+    .roadmap-grid { grid-template-columns: 1fr 1fr; }
+    .email-form { flex-direction: column; }
+    .email-input { border-right: 1px solid var(--border); border-bottom: none; border-radius: 2px 2px 0 0; }
+    .email-btn { border-radius: 0 0 2px 2px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Retail<span>ab</span></div>
+  <a href="#entra" class="nav-cta">Entra in lista</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="border-top: none;">
+  <div class="hero-bg"></div>
+  <div style="position: relative;">
+    <p class="hero-tag">Retail × Intelligenza Artificiale</p>
+    <h1 class="hero-title">
+      Il retail sta cambiando.<br>
+      <em>Retailab è per chi vuole<br>capirlo prima.</em>
+    </h1>
+    <p class="hero-sub">
+      Una piattaforma dove tool concreti, una community attiva e formazione pratica
+      si incontrano per trasformare il modo in cui lavori nel retail.
+    </p>
+    <div class="hero-actions">
+      <a href="#entra" class="btn-primary">Voglio entrare</a>
+      <span class="hero-scroll">↓ Scopri di più</span>
+    </div>
+  </div>
+</section>
+
+<!-- PER CHI -->
+<section id="perchi">
+  <p class="section-label reveal">Per chi è</p>
+  <h2 class="section-title reveal">Costruito da chi <em>vive il retail</em> sul campo.</h2>
+  <div class="perchi-grid reveal">
+    <div class="perchi-card">
+      <div class="perchi-num">01</div>
+      <h3>Retailer e manager</h3>
+      <p>Hai negozi, persone e numeri da gestire ogni giorno. Retailab ti dà strumenti concreti per lavorare meglio e decidere più velocemente.</p>
+    </div>
+    <div class="perchi-card">
+      <div class="perchi-num">02</div>
+      <h3>Area manager e responsabili</h3>
+      <p>Supervisi più punti vendita e hai bisogno di analisi chiare, report utili e supporto nelle decisioni operative e strategiche.</p>
+    </div>
+    <div class="perchi-card">
+      <div class="perchi-num">03</div>
+      <h3>Chi vuole capire l'AI nel retail</h3>
+      <p>Sei curioso, vuoi imparare, vuoi sperimentare. Retailab è il posto giusto per farlo in modo pratico, senza teoria vuota.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OGGI -->
+<section id="oggi">
+  <p class="section-label reveal">Cosa c'è oggi</p>
+  <div class="oggi-wrap">
+    <div>
+      <div class="oggi-badge reveal">In test — accesso su richiesta</div>
+      <h2 class="oggi-title reveal">App turni<br>per negozi</h2>
+      <p class="oggi-desc reveal">
+        Il primo tool di Retailab. Gestisci turni, dipendenti e punti vendita in modo semplice.
+        Con AI già integrata che suggerisce gli orari ottimali basandosi sulle vendite e le attività settimanali.
+      </p>
+      <ul class="oggi-features reveal">
+        <li>Gestione turni settimanali per negozio</li>
+        <li>Vista calendario e stampa PDF</li>
+        <li>Export Excel e condivisione WhatsApp</li>
+        <li>AI integrata per suggerire turni ottimali</li>
+      </ul>
+    </div>
+    <div class="reveal" style="border-radius:8px;overflow:hidden;border:1px solid rgba(240,234,216,0.1);box-shadow:0 20px 60px rgba(0,0,0,0.4);">
+      <img src="app-turni.jpg" alt="App turni Retailab" style="width:100%;display:block;">
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <p class="section-label reveal">Cosa arriva</p>
+  <h2 class="section-title reveal">La piattaforma <em>cresce con te.</em></h2>
+  <div class="roadmap-grid reveal">
+    <div class="roadmap-item">
+      <p class="roadmap-status live">● Live</p>
+      <h3>App turni</h3>
+      <p>Gestione turni con AI. Il primo tool concreto già disponibile in test.</p>
+    </div>
+    <div class="roadmap-item coming">
+      <p class="roadmap-status soon">◐ Presto</p>
+      <h3>Community</h3>
+      <p>Idee, discussioni e proposte aperte. Le migliori diventano tool reali.</p>
+    </div>
+    <div class="roadmap-item coming">
+      <p class="roadmap-status future">○ In arrivo</p>
+      <h3>Lab</h3>
+      <p>Nuovi tool nati dalle idee della community. Freemium, subito utilizzabili.</p>
+    </div>
+    <div class="roadmap-item coming">
+      <p class="roadmap-status future">○ In arrivo</p>
+      <h3>Academy</h3>
+      <p>Corsi pratici su come usare l'AI nel retail. Zero teoria, tutto applicabile.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CHI SONO -->
+<section id="chisono">
+  <p class="section-label reveal">Chi c'è dietro</p>
+  <div class="oggi-wrap">
+    <div class="reveal" style="display:flex; flex-direction:column; justify-content:center;">
+      <h2 class="section-title" style="margin-bottom:28px;">Sono Andrea.<br><em>Non sono un informatico.</em></h2>
+      <p style="font-size:17px; color:var(--cream-muted); line-height:1.8; margin-bottom:20px;">
+        Faccio l'area manager nel retail da anni. Gestisco negozi, persone, numeri, problemi reali — ogni giorno sul campo.
+      </p>
+      <p style="font-size:17px; color:var(--cream-muted); line-height:1.8; margin-bottom:20px;">
+        A un certo punto ho iniziato a usare l'intelligenza artificiale per lavorare meglio. Non perché fossi un tecnico — ma perché ero curioso e vedevo che poteva davvero aiutare.
+      </p>
+      <p style="font-size:17px; color:var(--cream-muted); line-height:1.8;">
+        Retailab nasce da lì: dalla voglia di condividere quello che sto imparando con chi lavora nel retail come me. Niente teoria, niente hype. Solo cose che funzionano davvero.
+      </p>
+    </div>
+    <div class="reveal" style="display:flex; align-items:center; justify-content:center;">
+      <div id="foto-placeholder" style="
+        width:100%;
+        max-width:360px;
+        aspect-ratio:3/4;
+        border-radius:4px;
+        border:1px solid var(--border);
+        background:var(--bg2);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        overflow:hidden;
+      ">
+        <img id="foto-andrea" src="andrea.jpg" alt="Andrea" style="width:100%; height:100%; object-fit:cover; display:block;">
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMAIL -->
+<section class="email-section" id="entra" style="border-top: 1px solid var(--border);">
+  <p class="section-label reveal" style="text-align:center;">Accesso anticipato</p>
+  <h2 class="section-title reveal">Vuoi entrare<br><em>prima degli altri?</em></h2>
+  <p class="section-sub reveal">
+    Retailab è in costruzione. Lascia la mail e sarai tra i primi ad accedere
+    ai tool, alla community e ai contenuti non appena saranno pronti.
+  </p>
+  <div class="reveal">
+    <form id="emailForm" onsubmit="handleSubmit(event)" style="max-width:480px;margin:0 auto;">
+      <div style="display:flex;gap:0;margin-bottom:16px;">
+        <input type="email" class="email-input" placeholder="La tua email" required id="emailInput" style="border-right:1px solid var(--border);border-radius:2px;">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;">
+        <label id="label-app" style="display:flex;align-items:center;gap:10px;padding:14px 16px;border:1px solid var(--border);border-radius:2px;cursor:pointer;transition:all 0.2s;background:rgba(240,234,216,0.03);">
+          <input type="radio" name="interesse" value="app" id="radio-app" required style="accent-color:var(--accent);width:16px;height:16px;">
+          <span style="font-size:14px;line-height:1.4;">Voglio provare<br><strong>l'app turni</strong></span>
+        </label>
+        <label id="label-follow" style="display:flex;align-items:center;gap:10px;padding:14px 16px;border:1px solid var(--border);border-radius:2px;cursor:pointer;transition:all 0.2s;background:rgba(240,234,216,0.03);">
+          <input type="radio" name="interesse" value="follow" id="radio-follow" required style="accent-color:var(--accent);width:16px;height:16px;">
+          <span style="font-size:14px;line-height:1.4;">Voglio seguire<br><strong>il progetto</strong></span>
+        </label>
+      </div>
+      <button type="submit" class="email-btn" style="width:100%;border-radius:2px;padding:16px;">Entra in lista</button>
+    </form>
+    <p class="email-note">Niente spam. Solo aggiornamenti veri quando c'è qualcosa di concreto.</p>
+    <p class="email-success" id="emailSuccess">Perfetto — sei dentro. Ti aggiorniamo presto.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Retail<span>ab</span></div>
+  <p>© 2026 Retailab · retailab.it</p>
+  <p>Fatto con curiosità e intelligenza artificiale.</p>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Highlight radio selezionato
+  document.querySelectorAll('input[name="interesse"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      document.getElementById('label-app').style.borderColor = 'var(--border)';
+      document.getElementById('label-follow').style.borderColor = 'var(--border)';
+      document.getElementById('label-app').style.background = 'rgba(240,234,216,0.03)';
+      document.getElementById('label-follow').style.background = 'rgba(240,234,216,0.03)';
+      const sel = document.querySelector('input[name="interesse"]:checked');
+      if (sel) {
+        document.getElementById('label-' + sel.value).style.borderColor = 'var(--accent)';
+        document.getElementById('label-' + sel.value).style.background = 'rgba(201,95,40,0.08)';
+      }
+    });
+  });
+
+  // Email form
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const email = document.getElementById('emailInput').value;
+    const interesse = document.querySelector('input[name="interesse"]:checked')?.value;
+    const btn = document.querySelector('.email-btn');
+    btn.textContent = 'Iscrizione...';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, interesse })
+      });
+      if (res.ok) {
+        document.getElementById('emailForm').style.display = 'none';
+        document.querySelector('.email-note').style.display = 'none';
+        document.getElementById('emailSuccess').style.display = 'block';
+        document.getElementById('emailSuccess').textContent = interesse === 'app'
+          ? 'Perfetto — ti contatteremo presto per darti accesso.'
+          : 'Perfetto — sei dentro. Ti aggiorniamo quando c\'è qualcosa di nuovo.';
+      } else {
+        btn.textContent = 'Riprova';
+        btn.disabled = false;
+      }
+    } catch (err) {
+      btn.textContent = 'Riprova';
+      btn.disabled = false;
+    }
+  }
+</script>
+
+</body>
+</html>
