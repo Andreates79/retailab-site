@@ -120,6 +120,13 @@
   .ptag::before{content:'';position:absolute;left:9px;top:50%;transform:translateY(-50%);width:7px;height:7px;border-radius:50%;background:var(--bg);box-shadow:inset 0 1px 2px rgba(0,0,0,.5);}
   .rr:hover .ptag{opacity:1;transform:translateY(-50%) rotate(-4deg) scale(1);animation:swing .9s var(--ease);}
   @keyframes swing{0%{transform:translateY(-50%) rotate(-16deg) scale(1)}38%{transform:translateY(-50%) rotate(4deg) scale(1)}68%{transform:translateY(-50%) rotate(-9deg) scale(1)}100%{transform:translateY(-50%) rotate(-4deg) scale(1)}}
+  /* Anteprima fluttuante delle app sull'hover della vetrina */
+  #peek{position:fixed;z-index:500;width:340px;aspect-ratio:4/3;border-radius:12px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -20px #000;pointer-events:none;opacity:0;transform:scale(.85) rotate(-4deg);transition:opacity .25s var(--ease),transform .25s var(--ease);background:#111;}
+  #peek img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;}
+  #peek.on{opacity:1;transform:scale(1) rotate(-2deg);}
+  @media(max-width:900px),(pointer:coarse){#peek{display:none;}}
+  .rthumb{display:none;margin-top:14px;width:100%;max-width:380px;border-radius:10px;border:1px solid var(--line);}
+  @media(max-width:900px){.rthumb{display:block;}}
   /* Saracinesca all'apertura */
   #shutter{position:fixed;inset:0;z-index:9998;background:repeating-linear-gradient(180deg,#221e18 0 4px,#2b261f 4px 18px,#191613 18px 22px);box-shadow:inset 0 -30px 60px rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;transition:transform 1.1s cubic-bezier(.7,0,.25,1) .35s;}
   #shutter.up{transform:translateY(-100%);}
@@ -282,9 +289,9 @@
   <h2 class="h2 reveal">Gli strumenti, <span class="it">in vetrina.</span></h2>
   <div class="road">
     <div class="rr reveal"><span class="ix">i.</span><div><h3>StoreSync</h3><p>Turni con AI sui dati di vendita. Già in test in negozi veri.</p></div><span class="ptag">€ 0,00 · PER I PRIMI</span><span class="st live">● Live</span></div>
-    <div class="rr reveal"><span class="ix">ii.</span><div><h3>Vendeuse</h3><p>Beauty academy per chi vende in profumeria. Lezioni e tutor AI: fragranze, vendita, makeup, skincare.</p></div><span class="ptag">PER CHI VENDE BELLEZZA</span><span class="st soon">◐ In test</span></div>
-    <div class="rr reveal"><span class="ix">iii.</span><div><h3>Adelmo</h3><p>L'agente AI per la ricerca lavoro nel retail: trova le opportunità, le valuta e ti prepara.</p></div><span class="ptag">€ 0,00 · AL TUO SERVIZIO</span><span class="st live">● Live</span></div>
-    <div class="rr reveal"><span class="ix">iv.</span><div><h3>009</h3><p>L'agente segreto delle ricerche di mercato: briefing e segnali su concorrenza e canale beauty.</p></div><span class="ptag">TOP SECRET</span><span class="st live">● Live</span></div>
+    <div class="rr reveal" data-preview="/previews/vendeuse.jpg"><span class="ix">ii.</span><div><h3>Vendeuse</h3><p>Beauty academy per chi vende in profumeria. Lezioni e tutor AI: fragranze, vendita, makeup, skincare.</p><img class="rthumb" src="/previews/vendeuse.jpg" alt="Anteprima di Vendeuse" loading="lazy"></div><span class="ptag">PER CHI VENDE BELLEZZA</span><span class="st soon">◐ In test</span></div>
+    <div class="rr reveal" data-preview="/previews/adelmo.jpg"><span class="ix">iii.</span><div><h3>Adelmo</h3><p>L'agente AI per la ricerca lavoro nel retail: trova le opportunità, le valuta e ti prepara.</p><img class="rthumb" src="/previews/adelmo.jpg" alt="Anteprima di Adelmo" loading="lazy"></div><span class="ptag">€ 0,00 · AL TUO SERVIZIO</span><span class="st live">● Live</span></div>
+    <div class="rr reveal" data-preview="/previews/009.jpg"><span class="ix">iv.</span><div><h3>009</h3><p>L'agente segreto delle ricerche di mercato: briefing e segnali su concorrenza e canale beauty.</p><img class="rthumb" src="/previews/009.jpg" alt="Anteprima di 009" loading="lazy"></div><span class="ptag">TOP SECRET</span><span class="st live">● Live</span></div>
     <div class="rr dim reveal"><span class="ix">v.</span><div><h3>Community</h3><p>Idee e discussioni aperte. Le migliori diventano tool.</p></div><span class="ptag">€ 0,00 · PER SEMPRE</span><span class="st next">○ In arrivo</span></div>
     <div class="rr dim reveal"><span class="ix">vi.</span><div><h3>Academy</h3><p>Corsi pratici sull'AI nel retail.</p></div><span class="ptag">PREZZO IN ARRIVO</span><span class="st next">○ In arrivo</span></div>
   </div>
@@ -342,6 +349,8 @@
     </div>
   </div>
 </section>
+
+<div id="peek" aria-hidden="true"><img src="" alt=""></div>
 
 <footer>
   <div class="logo" style="color:var(--cream);font-size:16px;"><span class="mk"></span>Retailab</div>
@@ -526,6 +535,23 @@ function rampMetric(id,from,to,dur){const el=document.getElementById(id),t0=perf
 function typeLine(html,done){const tmp=document.createElement('div');tmp.innerHTML=html;const plain=tmp.textContent;const el=document.getElementById('aiLine');let i=0;
   const t=()=>{el.textContent=plain.slice(0,i++);if(i<=plain.length)setTimeout(t,9);else{el.innerHTML=html;done&&done();}};t();}
 document.getElementById('regen').addEventListener('click',()=>buildSchedule((planIdx+1)%PLANS.length));
+
+/* ════ ANTEPRIMA FLUTTUANTE: screenshot delle app sull'hover della vetrina ════ */
+(function(){
+  const peek=document.getElementById('peek');
+  if(!peek||REDUCED||matchMedia('(pointer:coarse)').matches)return;
+  const img=peek.querySelector('img');
+  let px=innerWidth/2,py=innerHeight/2,tx2=px,ty2=py,raf=null;
+  document.querySelectorAll('.rr[data-preview]').forEach(rr=>{
+    rr.addEventListener('mouseenter',()=>{img.src=rr.dataset.preview;peek.classList.add('on');});
+    rr.addEventListener('mouseleave',()=>peek.classList.remove('on'));
+  });
+  addEventListener('mousemove',e=>{
+    tx2=Math.min(e.clientX+30,innerWidth-360);
+    ty2=Math.max(20,Math.min(e.clientY-130,innerHeight-290));
+  },{passive:true});
+  (function loop(){px+=(tx2-px)*.12;py+=(ty2-py)*.12;peek.style.left=px+'px';peek.style.top=py+'px';requestAnimationFrame(loop);})();
+})();
 
 /* ════ DRAG & DROP: trascina un turno, l'AI commenta in tempo reale ════ */
 (function(){
