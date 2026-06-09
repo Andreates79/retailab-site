@@ -8,39 +8,50 @@
 <meta property="og:title" content="Retailab — Il negozio che pensa">
 <meta property="og:description" content="L'AI applicata al retail di chi ci lavora davvero.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://retailab.it/">
+<meta property="og:image" content="https://retailab.it/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://retailab.it/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Space+Mono:wght@400;700&family=Hanken+Grotesk:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
   :root{
-    --bg:#0a0907;--bg2:#100e0b;--panel:#16130f;--cream:#efece4;--muted:#928b7c;
-    --terra:#d4612e;--terra-hi:#ff7d3f;--mint:#62e6c4;--line:rgba(239,236,228,.09);
+    --bg:#0f0d0a;--bg2:#16130f;--panel:#1c1813;--cream:#efece4;--muted:#a59d8c;
+    --terra:#d4612e;--terra-hi:#ff7d3f;--mint:#62e6c4;--line:rgba(239,236,228,.12);
+    --ss-bg:#f4f6fb;--ss-surface:#fff;--ss-mid:#eef0f8;--ss-text:#1a1a2e;--ss-mut:#6b7280;--ss-acc:#6366f1;--ss-green:#1d9e75;--ss-orange:#e8864a;--ss-line:rgba(99,102,241,.16);
     --display:'Sora',sans-serif;--mono:'Space Mono',monospace;--serif:'Instrument Serif',serif;--body:'Hanken Grotesk',sans-serif;
     --ease:cubic-bezier(.2,.9,.2,1);
   }
   html{scroll-behavior:smooth;}
   body{background:var(--bg);color:var(--cream);font-family:var(--body);font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none;}
   @media (pointer:coarse){body{cursor:auto;}#cur,#dot{display:none;}}
-  #gl{position:fixed;inset:0;z-index:0;width:100vw;height:100vh;display:block;background:radial-gradient(60% 60% at 60% 40%,#d4612e33,#0a0907);}
-  .scrim{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 90% at 50% 120%,rgba(10,9,7,.9),transparent 55%),linear-gradient(to bottom,rgba(10,9,7,.5),transparent 22%,transparent 66%,var(--bg) 100%);}
+  #gl{position:fixed;inset:0;z-index:0;width:100vw;height:100vh;display:block;background:radial-gradient(60% 60% at 60% 40%,#d4612e33,#0f0d0a);}
+  .scrim{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 90% at 50% 120%,rgba(15,13,10,.9),transparent 55%),linear-gradient(to bottom,rgba(15,13,10,.5),transparent 22%,transparent 66%,var(--bg) 100%);}
   body::after{content:'';position:fixed;inset:0;z-index:9997;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
   #cur{position:fixed;width:36px;height:36px;border:1px solid var(--cream);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:9999;mix-blend-mode:difference;transition:width .2s,height .2s,background .2s;}
   #dot{position:fixed;width:5px;height:5px;background:var(--cream);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:9999;mix-blend-mode:difference;}
   #cur.grow{width:70px;height:70px;background:rgba(239,236,228,.1);}
   .wrap{position:relative;z-index:3;}
   nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:24px 5vw;display:flex;justify-content:space-between;align-items:center;}
+  nav::before{content:'';position:absolute;inset:0;z-index:-1;background:rgba(15,13,10,.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);mask-image:linear-gradient(to bottom,#000 55%,transparent);-webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent);}
   .logo{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:-.04em;display:flex;align-items:center;gap:10px;}
   .logo .mk{width:12px;height:12px;background:var(--terra);border-radius:50% 50% 50% 0;transform:rotate(-15deg);box-shadow:0 0 18px var(--terra-hi);}
-  .nav-meta{font-family:var(--mono);font-size:11px;color:var(--cream);letter-spacing:.05em;opacity:.8;}
-  .nav-meta b{color:var(--mint);}
+  .neon{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.3em;color:var(--mint);border:1px solid rgba(98,230,196,.35);padding:8px 14px 8px 17px;border-radius:9px;text-shadow:0 0 8px rgba(98,230,196,.8),0 0 22px rgba(98,230,196,.45);box-shadow:inset 0 0 16px rgba(98,230,196,.07),0 0 20px rgba(98,230,196,.14);animation:neon 7s infinite;}
+  @keyframes neon{0%,87%,90%,94%,100%{opacity:1}88%{opacity:.5}92%{opacity:.75}}
   .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 5vw;position:relative;z-index:3;}
   .tag{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--cream);display:inline-flex;align-items:center;gap:12px;margin-bottom:30px;opacity:0;animation:fade .6s var(--ease) forwards .15s;}
   .tag::before{content:'';width:42px;height:1px;background:var(--terra-hi);}
   .title{font-family:var(--display);font-weight:800;font-size:clamp(54px,9.4vw,158px);line-height:.9;letter-spacing:-.05em;text-shadow:0 8px 60px rgba(0,0,0,.5);}
-  .title .it{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--terra-hi);}
+  .title .it{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--terra-hi);margin-left:.14em;}
   .title .scr{display:inline-block;}
   .sub{margin-top:34px;max-width:46ch;font-size:clamp(16px,1.4vw,20px);color:rgba(239,236,228,.82);line-height:1.7;opacity:0;animation:fade .6s var(--ease) forwards .7s;}
+  .now{margin-top:18px;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted);opacity:0;animation:fade .6s var(--ease) forwards 1s;}
+  .now b{color:var(--mint);font-weight:700;}
   .cta-row{margin-top:42px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;opacity:0;animation:fade .6s var(--ease) forwards .85s;}
   @keyframes fade{to{opacity:1;}}
   .btn{font-family:var(--body);font-weight:600;font-size:15px;text-decoration:none;padding:17px 34px;border-radius:100px;display:inline-block;border:1px solid rgba(239,236,228,.25);transition:transform .25s var(--ease),background .25s,color .25s,box-shadow .25s;will-change:transform;}
@@ -51,7 +62,7 @@
   .shint{position:absolute;bottom:34px;left:5vw;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:rgba(239,236,228,.6);display:flex;align-items:center;gap:10px;opacity:0;animation:fade .6s var(--ease) forwards 1.1s;}
   .shint .bar{width:1px;height:40px;background:linear-gradient(var(--terra-hi),transparent);animation:drop 1.6s ease infinite;}
   @keyframes drop{0%,100%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}}
-  .solid{background:var(--bg);position:relative;transform-origin:center top;will-change:transform;}
+  .solid{background:var(--bg);position:relative;}
   .marq{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;overflow:hidden;white-space:nowrap;background:var(--bg2);}
   .marq-t{display:inline-flex;will-change:transform;}
   .marq-i{font-family:var(--display);font-weight:700;font-size:30px;letter-spacing:-.02em;padding:0 36px;display:inline-flex;align-items:center;gap:36px;color:var(--cream);}
@@ -62,41 +73,60 @@
   .h2 .it{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--muted);}
   .stage-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:42px;}
   .persp{perspective:1400px;}
-  .scheduler{background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 50px 100px -50px #000;transition:transform .15s ease-out;transform-style:preserve-3d;will-change:transform;}
-  .sch-bar{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid var(--line);background:var(--bg2);gap:16px;flex-wrap:wrap;}
-  .left{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:13px;}
+  /* La demo usa il tema CHIARO di StoreSync, l'app vera (storesync.retailab.it) */
+  .scheduler{background:var(--ss-bg);border:1px solid var(--ss-line);border-radius:20px;overflow:hidden;box-shadow:0 50px 100px -40px rgba(0,0,0,.85),0 0 0 1px rgba(255,255,255,.06);transition:transform .15s ease-out;transform-style:preserve-3d;will-change:transform;color:var(--ss-text);}
+  .sch-bar{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid var(--ss-line);background:var(--ss-surface);gap:16px;flex-wrap:wrap;}
+  .left{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:13px;color:var(--ss-text);}
+  .left .ss-logo{font-family:var(--display);font-weight:800;font-size:14px;letter-spacing:-.02em;color:var(--ss-acc);}
   .traffic{display:flex;gap:7px;}.traffic i{width:11px;height:11px;border-radius:50%;}
   .traffic i:nth-child(1){background:#ff5f56}.traffic i:nth-child(2){background:#ffbd2e}.traffic i:nth-child(3){background:#27c93f}
   .sch-right{display:flex;align-items:center;gap:16px;}
-  .regen{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--cream);background:rgba(212,97,46,.18);border:1px solid rgba(212,97,46,.4);padding:8px 16px;border-radius:100px;cursor:none;transition:background .2s,transform .2s;}
-  .regen:hover{background:var(--terra);transform:translateY(-1px);}.regen:disabled{opacity:.4;}
-  .sch-status{font-family:var(--mono);font-size:12px;color:var(--mint);display:flex;align-items:center;gap:8px;white-space:nowrap;}
-  .sch-status .d{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint);animation:bl 1.2s infinite;}
+  .regen{font-family:var(--mono);font-size:12px;font-weight:700;color:#fff;background:var(--ss-acc);border:none;padding:9px 16px;border-radius:10px;cursor:none;transition:background .2s,transform .2s,box-shadow .2s;}
+  .regen:hover{background:#4f52e0;transform:translateY(-1px);box-shadow:0 8px 20px -6px rgba(99,102,241,.6);}.regen:disabled{opacity:.4;}
+  .sch-status{font-family:var(--mono);font-size:12px;color:var(--ss-green);display:flex;align-items:center;gap:8px;white-space:nowrap;}
+  .sch-status .d{width:7px;height:7px;border-radius:50%;background:var(--ss-green);box-shadow:0 0 8px rgba(29,158,117,.6);animation:bl 1.2s infinite;}
   @keyframes bl{50%{opacity:.3;}}
-  .grid{display:grid;grid-template-columns:120px repeat(7,1fr);}
-  .gc{padding:13px 10px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:54px;font-size:13px;display:flex;align-items:center;}
-  .gc.head{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--bg2);justify-content:center;}
-  .gc.name{font-weight:600;font-size:13px;}.gc.name .role{display:block;font-family:var(--mono);font-size:10px;color:var(--muted);font-weight:400;}
+  .sch-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;background:var(--ss-bg);}
+  .grid{display:grid;grid-template-columns:120px repeat(7,1fr);min-width:620px;}
+  .gc{padding:13px 10px;border-right:1px solid rgba(26,26,46,.07);border-bottom:1px solid rgba(26,26,46,.07);min-height:54px;font-size:13px;display:flex;align-items:center;}
+  .gc.head{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ss-mut);background:var(--ss-mid);justify-content:center;}
+  .gc.name{font-weight:600;font-size:13px;color:var(--ss-text);}.gc.name .role{display:block;font-family:var(--mono);font-size:10px;color:var(--ss-mut);font-weight:400;}
   .gc.slot{justify-content:center;}
-  .gc.slot.off{background:repeating-linear-gradient(45deg,transparent,transparent 6px,rgba(239,236,228,.02) 6px,rgba(239,236,228,.02) 12px);}
-  .shift{font-family:var(--mono);font-size:11px;font-weight:700;padding:6px 9px;border-radius:7px;opacity:0;transform:scale(.5);transition:opacity .28s var(--ease),transform .28s var(--ease),box-shadow .3s,background .3s,color .3s;}
-  .shift.on{opacity:1;transform:scale(1);}
-  .shift.m{background:rgba(98,230,196,.14);color:var(--mint);border:1px solid rgba(98,230,196,.3);}
-  .shift.p{background:rgba(212,97,46,.16);color:var(--terra-hi);border:1px solid rgba(212,97,46,.35);}
-  .shift.opt{background:var(--terra);color:#fff;box-shadow:0 0 24px rgba(255,125,63,.8);transform:scale(1.14);}
-  .ai-line{font-family:var(--mono);font-size:13px;color:var(--muted);padding:16px 24px;min-height:52px;display:flex;align-items:center;}
-  .ai-line b{color:var(--terra-hi);}.ai-line .spark{color:var(--mint);}
-  .sch-foot{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);}
-  .metric{padding:22px 24px;border-right:1px solid var(--line);}.metric:last-child{border-right:none;}
-  .metric .lab{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em;margin-bottom:8px;text-transform:uppercase;}
-  .metric .val{font-family:var(--display);font-weight:800;font-size:30px;letter-spacing:-.03em;display:flex;align-items:baseline;gap:8px;}
+  .gc.slot.off{background:repeating-linear-gradient(45deg,transparent,transparent 6px,rgba(26,26,46,.03) 6px,rgba(26,26,46,.03) 12px);}
+  .gc.slot.drop-ok{background:rgba(99,102,241,.1);box-shadow:inset 0 0 0 2px rgba(99,102,241,.45);}
+  .shift{font-family:var(--mono);font-size:11px;font-weight:700;padding:6px 9px;border-radius:7px;opacity:0;transform:scale(.5);transition:opacity .28s var(--ease),transform .28s var(--ease),box-shadow .3s,background .3s,color .3s;touch-action:none;user-select:none;-webkit-user-select:none;}
+  .shift.on{opacity:1;transform:scale(1);cursor:grab;}
+  .shift.m{background:rgba(29,158,117,.12);color:var(--ss-green);border:1px solid rgba(29,158,117,.35);}
+  .shift.p{background:rgba(232,134,74,.14);color:#c66a32;border:1px solid rgba(232,134,74,.4);}
+  .shift.opt{background:var(--ss-acc);color:#fff;box-shadow:0 0 22px rgba(99,102,241,.7);transform:scale(1.14);}
+  .shift.dragging{position:relative;z-index:10000;pointer-events:none;box-shadow:0 14px 30px -8px rgba(26,26,46,.45);transition:none;cursor:grabbing;}
+  .ai-line{font-family:var(--mono);font-size:13px;color:var(--ss-mut);padding:16px 24px;min-height:52px;line-height:1.6;background:var(--ss-surface);border-top:1px solid rgba(26,26,46,.07);}
+  .ai-line b{color:var(--ss-acc);}.ai-line .spark{color:var(--ss-green);}.ai-line .warn{color:var(--ss-orange);font-weight:700;}
+  .sch-foot{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ss-line);background:var(--ss-surface);}
+  .metric{padding:22px 24px;border-right:1px solid rgba(26,26,46,.07);}.metric:last-child{border-right:none;}
+  .metric .lab{font-family:var(--mono);font-size:11px;color:var(--ss-mut);letter-spacing:.06em;margin-bottom:8px;text-transform:uppercase;}
+  .metric .val{font-family:var(--display);font-weight:800;font-size:30px;letter-spacing:-.03em;display:flex;align-items:baseline;gap:8px;color:var(--ss-text);}
   .metric .val .delta{font-family:var(--mono);font-size:13px;font-weight:700;}
-  .delta.up{color:var(--mint);}.delta.down{color:var(--terra-hi);}
+  .delta.up{color:var(--ss-green);}.delta.down{color:var(--ss-orange);}
+  .demo-cap{margin-top:18px;font-family:var(--mono);font-size:12px;color:var(--muted);text-align:center;}
+  .demo-cap b{color:var(--cream);}
   .stats{padding:11vh 5vw;display:grid;grid-template-columns:repeat(3,1fr);gap:40px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
   .stat .n{font-family:var(--display);font-weight:800;font-size:clamp(48px,6vw,92px);letter-spacing:-.05em;line-height:1;background:linear-gradient(120deg,var(--cream),var(--terra-hi));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
   .stat .l{font-family:var(--mono);font-size:13px;color:var(--muted);margin-top:14px;}
   .road{margin-top:46px;border-top:1px solid var(--line);}
-  .rr{display:grid;grid-template-columns:80px 1fr auto;gap:28px;align-items:baseline;padding:32px 0;border-bottom:1px solid var(--line);transition:padding-left .3s var(--ease),background .3s;}
+  .rr{display:grid;grid-template-columns:80px 1fr auto;gap:28px;align-items:baseline;padding:32px 0;border-bottom:1px solid var(--line);transition:padding-left .3s var(--ease),background .3s;position:relative;}
+  /* Cartellino prezzo che dondola sull'hover */
+  .ptag{position:absolute;top:50%;right:170px;background:#f7f4ec;color:#221c12;font-family:var(--mono);font-size:11px;font-weight:700;padding:9px 14px 9px 24px;border-radius:4px;box-shadow:0 10px 24px -8px rgba(0,0,0,.7);pointer-events:none;white-space:nowrap;opacity:0;transform-origin:8% 0%;transform:translateY(-50%) rotate(-14deg) scale(.6);transition:opacity .25s var(--ease),transform .25s var(--ease);}
+  .ptag::before{content:'';position:absolute;left:9px;top:50%;transform:translateY(-50%);width:7px;height:7px;border-radius:50%;background:var(--bg);box-shadow:inset 0 1px 2px rgba(0,0,0,.5);}
+  .rr:hover .ptag{opacity:1;transform:translateY(-50%) rotate(-4deg) scale(1);animation:swing .9s var(--ease);}
+  @keyframes swing{0%{transform:translateY(-50%) rotate(-16deg) scale(1)}38%{transform:translateY(-50%) rotate(4deg) scale(1)}68%{transform:translateY(-50%) rotate(-9deg) scale(1)}100%{transform:translateY(-50%) rotate(-4deg) scale(1)}}
+  /* Saracinesca all'apertura */
+  #shutter{position:fixed;inset:0;z-index:9998;background:repeating-linear-gradient(180deg,#221e18 0 4px,#2b261f 4px 18px,#191613 18px 22px);box-shadow:inset 0 -30px 60px rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;transition:transform 1.1s cubic-bezier(.7,0,.25,1) .35s;}
+  #shutter.up{transform:translateY(-100%);}
+  #shutter .sh-logo{font-family:var(--display);font-weight:800;font-size:30px;letter-spacing:-.04em;color:var(--cream);display:flex;align-items:center;gap:12px;opacity:.92;}
+  #shutter .sh-logo .mk{width:14px;height:14px;background:var(--terra);border-radius:50% 50% 50% 0;transform:rotate(-15deg);box-shadow:0 0 18px var(--terra-hi);}
+  #shutter .sh-sub{font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--muted);text-transform:uppercase;}
+  #shutter::after{content:'';position:absolute;bottom:0;left:0;right:0;height:14px;background:#0c0a08;border-top:1px solid rgba(239,236,228,.15);}
   .rr:hover{padding-left:18px;background:linear-gradient(to right,rgba(212,97,46,.08),transparent);}
   .rr .ix{font-family:var(--mono);font-size:13px;color:var(--muted);}
   .rr h3{font-family:var(--display);font-weight:800;font-size:clamp(26px,3vw,42px);letter-spacing:-.03em;}
@@ -124,7 +154,7 @@
   .who-sign{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--cream);margin-top:6px;}
   .who-photo{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);aspect-ratio:3/4;box-shadow:0 40px 90px -50px #000;}
   .who-photo img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(.12) contrast(1.03);}
-  .who-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(10,9,7,.55),transparent 50%);pointer-events:none;}
+  .who-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(15,13,10,.55),transparent 50%);pointer-events:none;}
   /* FORM REALE */
   .ef2{max-width:480px;margin:0 auto;}
   .ef2 .row{display:flex;margin-bottom:14px;}
@@ -137,9 +167,30 @@
   .ef2 .submit{width:100%;background:var(--terra);color:#fff;border:none;font-family:var(--body);font-weight:600;font-size:15px;padding:17px;border-radius:100px;cursor:none;transition:background .2s,transform .25s var(--ease);}
   .ef2 .submit:hover{background:var(--terra-hi);} .ef2 .submit:disabled{opacity:.6;}
   .note{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:16px;opacity:.7;}
-  .success{display:none;font-family:var(--serif);font-style:italic;font-size:24px;color:var(--mint);margin-top:8px;}
+  /* SCONTRINO: stampato dalla "fessura" dopo l'iscrizione */
+  .receipt-slot{max-width:330px;margin:6px auto 0;display:none;}
+  .slot-bar{height:12px;background:#060504;border-radius:7px;box-shadow:inset 0 3px 8px #000,0 1px 0 rgba(239,236,228,.07);}
+  .receipt-clip{overflow:hidden;padding:0 16px;}
+  .receipt{position:relative;background:#f7f4ec;color:#221c12;font-family:var(--mono);font-size:12px;line-height:1.6;text-align:left;padding:20px 18px 22px;box-shadow:0 34px 60px -24px rgba(0,0,0,.85);transform:translateY(-103%);}
+  .receipt.printing{animation:printOut 2.4s var(--ease) forwards;}
+  @keyframes printOut{0%{transform:translateY(-103%)}18%{transform:translateY(-82%)}26%{transform:translateY(-82%)}46%{transform:translateY(-52%)}54%{transform:translateY(-52%)}76%{transform:translateY(-14%)}84%{transform:translateY(-14%)}100%{transform:translateY(0)}}
+  .receipt::after{content:'';position:absolute;top:100%;left:0;width:100%;height:8px;background:linear-gradient(45deg,transparent 33.333%,#f7f4ec 33.333%,#f7f4ec 66.667%,transparent 66.667%),linear-gradient(-45deg,transparent 33.333%,#f7f4ec 33.333%,#f7f4ec 66.667%,transparent 66.667%);background-size:14px 28px;background-position:0 -14px;}
+  .rc{font-weight:700;font-size:16px;text-align:center;letter-spacing:.18em;}
+  .rcs{font-size:10px;text-align:center;color:#6e6450;margin-top:2px;}
+  .rdiv{border-top:1px dashed #b9ae97;margin:12px 0;}
+  .rrow{display:flex;justify-content:space-between;gap:12px;}
+  .rrow.rsmall{font-size:10px;color:#6e6450;}
+  .rrow.rtot{font-weight:700;font-size:14px;}
+  .rbar{display:block;width:72%;height:34px;margin:4px auto 10px;}
+  .rbar rect{fill:#221c12;}
   .reveal{opacity:0;transform:translateY(28px);transition:opacity .5s var(--ease),transform .5s var(--ease);}
   .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    body{cursor:auto;}
+    #cur,#dot{display:none;}
+    *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  }
   @media(max-width:900px){
     .stats{grid-template-columns:1fr;gap:32px;}
     .rr{grid-template-columns:1fr;gap:6px;}.rr .st{justify-self:start;}
@@ -154,6 +205,10 @@
 </style>
 </head>
 <body>
+<div id="shutter" aria-hidden="true">
+  <div class="sh-logo"><span class="mk"></span>Retailab</div>
+  <div class="sh-sub">stiamo aprendo</div>
+</div>
 <canvas id="gl"></canvas>
 <div class="scrim"></div>
 <div id="cur"></div><div id="dot"></div>
@@ -161,7 +216,7 @@
 <div class="wrap">
 <nav>
   <div class="logo"><span class="mk"></span>Retailab</div>
-  <div class="nav-meta">sistema <b>online</b> · v1.0</div>
+  <div class="neon" title="L'AI non chiude mai">APERTO · 24/7</div>
 </nav>
 
 <header class="hero">
@@ -173,6 +228,7 @@
   </h1>
   <p class="sub">Strumenti che lavorano davvero. Un'AI che conosce il banco, non solo i grafici.
      Costruita da chi il retail lo fa ogni giorno — per chi lo fa ogni giorno.</p>
+  <p class="now" id="nowLine"></p>
   <div class="cta-row">
     <a href="#entra" class="btn solid mag">Voglio entrare</a>
     <a href="#demo" class="btn ghost mag">Guarda l'AI al lavoro ↓</a>
@@ -189,21 +245,21 @@
 <section class="stage" id="demo">
   <div class="stage-head">
     <div>
-      <p class="kicker reveal">App Turni · live</p>
+      <p class="kicker reveal">StoreSync · l'app turni, dal vivo</p>
       <h2 class="h2 reveal">L'AI costruisce<br>la settimana. <span class="it">In diretta.</span></h2>
     </div>
-    <p class="reveal" style="font-size:15px;color:var(--muted);max-width:32ch;">Piazza i turni, poi ottimizza i picchi. Premi <b style="color:var(--terra-hi)">Rigenera</b> e guardala ripensare tutto.</p>
+    <p class="reveal" style="font-size:15px;color:var(--muted);max-width:32ch;">Premi <b style="color:var(--terra-hi)">Rigenera</b> e guardala ripensare tutto. Oppure <b style="color:var(--terra-hi)">trascina un turno</b> in una casella vuota — e senti cosa ne pensa.</p>
   </div>
   <div class="persp">
     <div class="scheduler reveal" id="card">
       <div class="sch-bar">
-        <div class="left"><span class="traffic"><i></i><i></i><i></i></span> <span>turni · settimana 23 · Negozio Centro</span></div>
+        <div class="left"><span class="traffic"><i></i><i></i><i></i></span> <span class="ss-logo">StoreSync</span> <span>· settimana 23 · Negozio Centro</span></div>
         <div class="sch-right">
           <button class="regen mag" id="regen">↻ Rigenera con l'AI</button>
           <div class="sch-status"><span class="d"></span><span id="schState">pronto</span></div>
         </div>
       </div>
-      <div class="grid" id="grid"></div>
+      <div class="sch-scroll"><div class="grid" id="grid"></div></div>
       <p class="ai-line" id="aiLine"></p>
       <div class="sch-foot">
         <div class="metric"><div class="lab">Costo settimana</div><div class="val">€<span id="mCost">0</span> <span class="delta down" id="dCost"></span></div></div>
@@ -212,6 +268,7 @@
       </div>
     </div>
   </div>
+  <p class="demo-cap reveal">Questa è <b>StoreSync</b>, l'app turni di Retailab — già in test in negozi veri. Accesso su invito: lascia la mail qui sotto.</p>
 </section>
 
 <section class="stats">
@@ -224,10 +281,10 @@
   <p class="kicker reveal">La piattaforma cresce con te</p>
   <h2 class="h2 reveal">Una direzione, <span class="it">quattro tappe.</span></h2>
   <div class="road">
-    <div class="rr reveal"><span class="ix">i.</span><div><h3>App Turni</h3><p>Turni con AI sui dati di vendita. Già in test.</p></div><span class="st live">● Live</span></div>
-    <div class="rr dim reveal"><span class="ix">ii.</span><div><h3>Community</h3><p>Idee e discussioni aperte. Le migliori diventano tool.</p></div><span class="st soon">◐ Presto</span></div>
-    <div class="rr dim reveal"><span class="ix">iii.</span><div><h3>Lab</h3><p>Strumenti nati dalla community. Freemium.</p></div><span class="st next">○ In arrivo</span></div>
-    <div class="rr dim reveal"><span class="ix">iv.</span><div><h3>Academy</h3><p>Corsi pratici sull'AI nel retail.</p></div><span class="st next">○ In arrivo</span></div>
+    <div class="rr reveal"><span class="ix">i.</span><div><h3>StoreSync</h3><p>Turni con AI sui dati di vendita. Già in test.</p></div><span class="ptag">€ 0,00 · PER I PRIMI</span><span class="st live">● Live</span></div>
+    <div class="rr dim reveal"><span class="ix">ii.</span><div><h3>Community</h3><p>Idee e discussioni aperte. Le migliori diventano tool.</p></div><span class="ptag">€ 0,00 · PER SEMPRE</span><span class="st soon">◐ Presto</span></div>
+    <div class="rr dim reveal"><span class="ix">iii.</span><div><h3>Lab</h3><p>Strumenti nati dalla community. Freemium.</p></div><span class="ptag">GRATIS PER INIZIARE</span><span class="st next">○ In arrivo</span></div>
+    <div class="rr dim reveal"><span class="ix">iv.</span><div><h3>Academy</h3><p>Corsi pratici sull'AI nel retail.</p></div><span class="ptag">PREZZO IN ARRIVO</span><span class="st next">○ In arrivo</span></div>
   </div>
 </section>
 
@@ -250,19 +307,43 @@
   <p>Retailab è in costruzione. Lascia la mail: sarai tra i primi ad accedere ai tool, alla community e ai contenuti.</p>
   <form class="ef2" id="emailForm" onsubmit="handleSubmit(event)">
     <div class="row"><input type="email" id="emailInput" placeholder="La tua email" required aria-label="Email"></div>
+    <input type="text" id="hpAzienda" name="azienda" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
     <div class="choices">
       <label class="choice" id="ch-app"><input type="radio" name="interesse" value="app" required> Voglio provare <b>l'app turni</b></label>
       <label class="choice" id="ch-follow"><input type="radio" name="interesse" value="follow" required> Voglio seguire <b>il progetto</b></label>
     </div>
     <button type="submit" class="submit mag">Entra in lista</button>
   </form>
-  <p class="note">Niente spam. Solo aggiornamenti veri quando c'è qualcosa di concreto.</p>
-  <p class="success" id="emailSuccess">Perfetto — sei dentro. ✦</p>
+  <p class="note">Niente spam. Solo aggiornamenti veri quando c'è qualcosa di concreto.<br>Iscrivendoti accetti la <a href="/privacy.html" style="color:var(--cream);">privacy policy</a>.</p>
+  <div class="receipt-slot" id="receiptSlot" aria-live="polite">
+    <div class="slot-bar"></div>
+    <div class="receipt-clip">
+      <div class="receipt" id="receipt">
+        <p class="rc">RETAILAB</p>
+        <p class="rcs">il negozio che pensa · retailab.it</p>
+        <div class="rdiv"></div>
+        <div class="rrow"><span>DATA</span><span id="rDate"></span></div>
+        <div class="rrow"><span>ORA</span><span id="rTime"></span></div>
+        <div class="rrow"><span>OPERATORE</span><span>PINA (AI)</span></div>
+        <div class="rdiv"></div>
+        <div class="rrow"><span>1× POSTO IN LISTA</span><span>€ 0,00</span></div>
+        <div class="rrow rsmall"><span id="rItemSub"></span><span></span></div>
+        <div class="rdiv"></div>
+        <div class="rrow rtot"><span>TOTALE</span><span>€ 0,00</span></div>
+        <div class="rrow rsmall"><span>PAGAMENTO</span><span>CURIOSITÀ</span></div>
+        <div class="rdiv"></div>
+        <svg class="rbar" viewBox="0 0 200 36" preserveAspectRatio="none" aria-hidden="true">
+          <rect x="0" width="4" height="36"/><rect x="7" width="2" height="36"/><rect x="12" width="5" height="36"/><rect x="20" width="2" height="36"/><rect x="25" width="3" height="36"/><rect x="31" width="6" height="36"/><rect x="40" width="2" height="36"/><rect x="45" width="4" height="36"/><rect x="53" width="2" height="36"/><rect x="58" width="5" height="36"/><rect x="66" width="3" height="36"/><rect x="72" width="2" height="36"/><rect x="77" width="6" height="36"/><rect x="86" width="2" height="36"/><rect x="91" width="4" height="36"/><rect x="98" width="3" height="36"/><rect x="104" width="2" height="36"/><rect x="109" width="5" height="36"/><rect x="117" width="2" height="36"/><rect x="122" width="4" height="36"/><rect x="130" width="6" height="36"/><rect x="139" width="2" height="36"/><rect x="144" width="3" height="36"/><rect x="150" width="5" height="36"/><rect x="158" width="2" height="36"/><rect x="163" width="4" height="36"/><rect x="170" width="2" height="36"/><rect x="175" width="6" height="36"/><rect x="184" width="2" height="36"/><rect x="189" width="4" height="36"/><rect x="196" width="4" height="36"/>
+        </svg>
+        <p class="rcs">GRAZIE — TI SCRIVIAMO PRESTO.<br>QUESTO SCONTRINO NON SI BUTTA: SEI DENTRO. ✦</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <footer>
   <div class="logo" style="color:var(--cream);font-size:16px;"><span class="mk"></span>Retailab</div>
-  <div>© <span id="yr"></span> Retailab · retailab.it</div>
+  <div>© <span id="yr"></span> Retailab · retailab.it · <a href="/privacy.html" style="color:var(--muted);">privacy</a></div>
   <div>fatto con curiosità + AI</div>
 </footer>
 </div>
@@ -270,6 +351,34 @@
 
 <script>
 document.getElementById('yr').textContent=new Date().getFullYear();
+const REDUCED=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ════ SARACINESCA: si alza all'apertura, una volta per sessione ════ */
+(function(){
+  const sh=document.getElementById('shutter');
+  if(REDUCED||sessionStorage.getItem('rl-shutter')){sh.remove();return;}
+  sessionStorage.setItem('rl-shutter','1');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>sh.classList.add('up')));
+  sh.addEventListener('transitionend',()=>sh.remove());
+  setTimeout(()=>{if(document.body.contains(sh))sh.remove();},2800);
+})();
+
+/* ════ ORA DEL NEGOZIO: messaggio contestuale nella hero ════ */
+(function(){
+  const el=document.getElementById('nowLine');if(!el)return;
+  function upd(){
+    const d=new Date(),h=d.getHours(),hm=d.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});
+    let msg;
+    if(h>=5&&h<9)msg='l\'AI ha già pensato ai turni di oggi.';
+    else if(h>=9&&h<13)msg='il negozio è nel pieno — l\'AI tiene il passo.';
+    else if(h>=13&&h<15)msg='pausa pranzo. L\'AI non ne ha bisogno.';
+    else if(h>=15&&h<20)msg='picco pomeridiano: coperto.';
+    else if(h>=20)msg='il negozio chiude. L\'AI continua a pensare.';
+    else msg='a quest\'ora il negozio lo pensa l\'AI. Tu dormi.';
+    el.innerHTML='<b>'+hm+'</b> — '+msg;
+  }
+  upd();setInterval(upd,30000);
+})();
 
 /* ════ WEBGL ottimizzato (4 ottave, buffer 0.66x, mouse reattivo) ════ */
 (function(){
@@ -289,7 +398,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
     vec2 q=vec2(fbm(p+t),fbm(p+vec2(5.2,1.3)-t));
     vec2 r=vec2(fbm(p+1.7*q+m+vec2(1.7,9.2)+0.2*t),fbm(p+1.7*q+m+vec2(8.3,2.8)-0.16*t));
     float f=fbm(p+2.0*r);
-    vec3 c1=vec3(0.039,0.035,0.027),c2=vec3(0.83,0.38,0.18),c3=vec3(1.0,0.49,0.247),c4=vec3(0.937,0.925,0.894);
+    vec3 c1=vec3(0.059,0.051,0.039),c2=vec3(0.83,0.38,0.18),c3=vec3(1.0,0.49,0.247),c4=vec3(0.937,0.925,0.894);
     vec3 col=mix(c1,c2,clamp(f*f*2.3,0.,1.));
     col=mix(col,c3,clamp(length(r),0.,1.)*0.7);
     col=mix(col,c4,clamp(q.x*q.x*1.4,0.,1.)*0.22);
@@ -312,7 +421,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
     if(vis){mx+=(tmx-mx)*.14;my+=(tmy-my)*.14;
       gl.uniform2f(uR,cv.width,cv.height);gl.uniform1f(uT,(now-t0)/1000);gl.uniform2f(uM,mx,my);
       gl.drawArrays(gl.TRIANGLES,0,3);}
-    requestAnimationFrame(r);
+    if(!REDUCED)requestAnimationFrame(r); // con reduced-motion resta il primo frame, statico
   })(t0);
 })();
 
@@ -320,7 +429,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
 const cur=document.getElementById('cur'),dot=document.getElementById('dot');
 let cx=innerWidth/2,cy=innerHeight/2,tx=cx,ty=cy;
 addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY;dot.style.left=tx+'px';dot.style.top=ty+'px';},{passive:true});
-(function l(){cx+=(tx-cx)*.35;cy+=(ty-cy)*.35;cur.style.left=cx+'px';cur.style.top=cy+'px';requestAnimationFrame(l);})();
+if(!REDUCED)(function l(){cx+=(tx-cx)*.35;cy+=(ty-cy)*.35;cur.style.left=cx+'px';cur.style.top=cy+'px';requestAnimationFrame(l);})();
 document.querySelectorAll('a,button,input').forEach(el=>{el.addEventListener('mouseenter',()=>cur.classList.add('grow'));el.addEventListener('mouseleave',()=>cur.classList.remove('grow'));});
 
 /* ════ MAGNETIC ════ */
@@ -329,15 +438,11 @@ document.querySelectorAll('.mag').forEach(bn=>{
   bn.addEventListener('mouseleave',()=>bn.style.transform='');
 });
 
-/* ════ SCROLL-VELOCITY: skew sezioni + marquee cinetico ════ */
-const solid=document.getElementById('solid'),marq=document.getElementById('marq');
-let lastY=scrollY,vel=0,marqX=0;
-(function tick(){
-  const y=scrollY,dy=y-lastY;lastY=y;
-  vel+=(dy-vel)*0.25;
-  const sk=Math.max(-7,Math.min(7,vel*0.35));
-  solid.style.transform=`skewY(${sk}deg)`;
-  marqX-=1.1+Math.abs(vel)*0.35;            // il marquee accelera con lo scroll
+/* ════ MARQUEE a velocità costante (skew rimosso: causava nausea allo scroll) ════ */
+const marq=document.getElementById('marq');
+let marqX=0;
+if(!REDUCED)(function tick(){
+  marqX-=0.5;
   if(marqX<=-50)marqX+=50;
   marq.style.transform=`translateX(${marqX}%)`;
   requestAnimationFrame(tick);
@@ -352,7 +457,7 @@ card.addEventListener('mouseleave',()=>card.style.transform='');
 
 /* ════ SCRAMBLE veloce ════ */
 const GLYPH='ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&@/\\<>*';
-document.querySelectorAll('.scr').forEach((el,k)=>{const fin=el.dataset.final;
+if(!REDUCED)document.querySelectorAll('.scr').forEach((el,k)=>{const fin=el.dataset.final;
   const start=()=>{let it=0;const iv=setInterval(()=>{
     el.textContent=fin.split('').map((ch,i)=>ch===' '?' ':(i<it?fin[i]:GLYPH[Math.floor(Math.random()*GLYPH.length)])).join('');
     it+=0.8;if(it>fin.length){clearInterval(iv);el.textContent=fin;}},18);};
@@ -390,11 +495,12 @@ function buildSchedule(idx){
   const plan=PLANS[idx],scen=SCEN[idx],g=document.getElementById('grid');g.innerHTML='';
   document.getElementById('regen').disabled=true;document.getElementById('aiLine').innerHTML='';
   document.getElementById('dCost').textContent='';document.getElementById('dCov').textContent='';
-  const ss=document.getElementById('schState');ss.textContent='elaboro…';ss.style.color='var(--mint)';
+  const ss=document.getElementById('schState');ss.textContent='elaboro…';
   g.appendChild(cell('gc head',''));DAYS.forEach(d=>g.appendChild(cell('gc head',d)));
   const shifts=[];
   STAFF.forEach((s,ri)=>{const nc=cell('gc name','');nc.innerHTML=`${s.n}<span class="role">${s.r}</span>`;g.appendChild(nc);
-    plan[ri].forEach(p=>{const c=cell('gc slot'+(p?'':' off'),'');
+    plan[ri].forEach((p,di)=>{const c=cell('gc slot'+(p?'':' off'),'');
+      c.dataset.row=ri;c.dataset.day=di;
       if(p){const sh=document.createElement('span');sh.className='shift '+p;sh.textContent=LABELS[p];c.appendChild(sh);shifts.push(sh);}
       g.appendChild(c);});});
   rampMetric('mCost',0,scen.cost[0],600);rampMetric('mCov',0,scen.cov[0],600);rampMetric('mTime',0,0,1);
@@ -419,6 +525,53 @@ function typeLine(html,done){const tmp=document.createElement('div');tmp.innerHT
   const t=()=>{el.textContent=plain.slice(0,i++);if(i<=plain.length)setTimeout(t,9);else{el.innerHTML=html;done&&done();}};t();}
 document.getElementById('regen').addEventListener('click',()=>buildSchedule((planIdx+1)%PLANS.length));
 
+/* ════ DRAG & DROP: trascina un turno, l'AI commenta in tempo reale ════ */
+(function(){
+  const g=document.getElementById('grid');
+  const DN=['lunedì','martedì','mercoledì','giovedì','venerdì','sabato','domenica'];
+  let drag=null;
+  g.addEventListener('pointerdown',e=>{
+    const sh=e.target.closest('.shift');
+    if(!sh||running)return;
+    e.preventDefault();
+    const from=sh.closest('.gc.slot');if(!from)return;
+    drag={sh,from,x0:e.clientX,y0:e.clientY};
+    sh.classList.add('dragging');
+    // solo caselle vuote della stessa persona
+    document.querySelectorAll(`.gc.slot[data-row="${from.dataset.row}"]`).forEach(c=>{
+      if(!c.querySelector('.shift'))c.classList.add('drop-ok');});
+  });
+  function move(e){if(!drag)return;drag.sh.style.transform=`translate(${e.clientX-drag.x0}px,${e.clientY-drag.y0}px) scale(1.15)`;}
+  addEventListener('pointermove',move,{passive:true});
+  addEventListener('pointerup',e=>{
+    if(!drag)return;
+    const d=drag;drag=null;
+    const under=document.elementFromPoint(e.clientX,e.clientY);
+    const target=under?under.closest('.gc.slot'):null;
+    const ok=target&&target.classList.contains('drop-ok');
+    document.querySelectorAll('.drop-ok').forEach(c=>c.classList.remove('drop-ok'));
+    d.sh.classList.remove('dragging');d.sh.style.transform='';
+    if(ok){
+      target.appendChild(d.sh);target.classList.remove('off');
+      if(!d.from.querySelector('.shift'))d.from.classList.add('off');
+      aiReact(d.from,target);
+    }
+  });
+  function aiReact(from,to){
+    const day=+to.dataset.day,fromDay=+from.dataset.day;
+    const name=STAFF[+to.dataset.row].n;
+    let msg,delta;
+    if(day>=4&&fromDay<4){msg=`${name} dal ${DN[fromDay]} al ${DN[day]}: rinforzi il picco del weekend. <span class="spark">✦ approvato.</span>`;delta=3;}
+    else if(day<4&&fromDay>=4){msg=`occhio — togli ${name} dal ${DN[fromDay]} e il weekend resta scoperto. Vuoi che riequilibri io? <span class="warn">⚠ copertura giù.</span>`;delta=-4;}
+    else{msg=`${name} al ${DN[day]}: copertura simile. Registro la preferenza. <span class="spark">✦ fatto.</span>`;delta=1;}
+    typeLine('<b>AI</b>&nbsp; '+msg,null);
+    const cur=parseInt(document.getElementById('mCov').textContent,10)||0;
+    rampMetric('mCov',cur,Math.max(0,Math.min(100,cur+delta)),500);
+    const dc=document.getElementById('dCov');
+    dc.textContent=(delta>=0?'+':'')+delta;dc.className='delta '+(delta>=0?'up':'down');
+  }
+})();
+
 /* ════ FORM ISCRIZIONE → backend (Brevo + Telegram) ════ */
 document.querySelectorAll('input[name="interesse"]').forEach(r=>r.addEventListener('change',()=>{
   document.getElementById('ch-app').classList.remove('sel');
@@ -426,6 +579,18 @@ document.querySelectorAll('input[name="interesse"]').forEach(r=>r.addEventListen
   const s=document.querySelector('input[name="interesse"]:checked');
   if(s)document.getElementById('ch-'+s.value).classList.add('sel');
 }));
+/* Lo scontrino esce dalla fessura come da un registratore di cassa */
+function printReceipt(interesse){
+  const d=new Date();
+  document.getElementById('rDate').textContent=d.toLocaleDateString('it-IT');
+  document.getElementById('rTime').textContent=d.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});
+  document.getElementById('rItemSub').textContent=
+    interesse==='app'?'ACCESSO ANTICIPATO APP TURNI':'AGGIORNAMENTI SUL PROGETTO';
+  document.getElementById('emailForm').style.display='none';
+  document.querySelector('.note').style.display='none';
+  document.getElementById('receiptSlot').style.display='block';
+  requestAnimationFrame(()=>document.getElementById('receipt').classList.add('printing'));
+}
 async function handleSubmit(e){
   e.preventDefault();
   const email=document.getElementById('emailInput').value;
@@ -434,15 +599,10 @@ async function handleSubmit(e){
   const btn=document.querySelector('.ef2 .submit');
   btn.textContent='Iscrizione…';btn.disabled=true;
   try{
-    const res=await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,interesse})});
-    if(res.ok){
-      document.getElementById('emailForm').style.display='none';
-      document.querySelector('.note').style.display='none';
-      const s=document.getElementById('emailSuccess');s.style.display='block';
-      s.textContent=interesse==='app'
-        ? 'Perfetto — ti contattiamo presto per darti accesso. ✦'
-        : 'Perfetto — sei dentro. Ti aggiorniamo quando c\'è qualcosa di nuovo. ✦';
-    }else{btn.textContent='Riprova';btn.disabled=false;}
+    const azienda=document.getElementById('hpAzienda').value; // honeypot: i bot lo compilano, gli umani no
+    const res=await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,interesse,azienda})});
+    if(res.ok){printReceipt(interesse);}
+    else{btn.textContent='Riprova';btn.disabled=false;}
   }catch(err){btn.textContent='Riprova';btn.disabled=false;}
 }
 </script>
