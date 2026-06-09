@@ -3,760 +3,448 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Retailab — AI applicata al retail</title>
-<meta name="description" content="La piattaforma dove il retail incontra l'intelligenza artificiale. Tool, community e formazione per chi lavora nel settore.">
+<title>Retailab — Il negozio che pensa</title>
+<meta name="description" content="L'intelligenza artificiale che lavora con te al banco. Retailab.">
+<meta property="og:title" content="Retailab — Il negozio che pensa">
+<meta property="og:description" content="L'AI applicata al retail di chi ci lavora davvero.">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300&family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Space+Mono:wght@400;700&family=Hanken+Grotesk:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --bg: #0c0b09;
-    --bg2: #141210;
-    --cream: #f0ead8;
-    --cream-muted: #a09880;
-    --accent: #c95f28;
-    --accent-light: #e87040;
-    --border: rgba(240,234,216,0.1);
-    --font-display: 'Fraunces', serif;
-    --font-ui: 'Syne', sans-serif;
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --bg:#0a0907;--bg2:#100e0b;--panel:#16130f;--cream:#efece4;--muted:#928b7c;
+    --terra:#d4612e;--terra-hi:#ff7d3f;--mint:#62e6c4;--line:rgba(239,236,228,.09);
+    --display:'Sora',sans-serif;--mono:'Space Mono',monospace;--serif:'Instrument Serif',serif;--body:'Hanken Grotesk',sans-serif;
+    --ease:cubic-bezier(.2,.9,.2,1);
   }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--cream);
-    font-family: var(--font-ui);
-    font-size: 16px;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  /* ── NAV ── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 20px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: linear-gradient(to bottom, rgba(12,11,9,0.95), transparent);
-  }
-
-  .nav-logo {
-    font-family: var(--font-display);
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--cream);
-    letter-spacing: -0.5px;
-  }
-
-  .nav-logo span { color: var(--accent); }
-
-  .nav-cta {
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--cream);
-    text-decoration: none;
-    border: 1px solid var(--border);
-    padding: 10px 20px;
-    border-radius: 2px;
-    transition: all 0.2s;
-  }
-
-  .nav-cta:hover {
-    background: var(--accent);
-    border-color: var(--accent);
-  }
-
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0 40px 80px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 60% 50% at 70% 40%, rgba(201,95,40,0.12) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,95,40,0.06) 0%, transparent 60%);
-  }
-
-  .hero-tag {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 24px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.2s;
-  }
-
-  .hero-title {
-    font-family: var(--font-display);
-    font-size: clamp(52px, 7vw, 96px);
-    font-weight: 700;
-    line-height: 1.0;
-    letter-spacing: -2px;
-    max-width: 900px;
-    opacity: 0;
-    animation: fadeUp 0.9s ease forwards 0.4s;
-  }
-
-  .hero-title em {
-    font-style: italic;
-    font-weight: 300;
-    color: var(--cream-muted);
-  }
-
-  .hero-sub {
-    margin-top: 32px;
-    font-size: 18px;
-    font-weight: 400;
-    color: var(--cream-muted);
-    max-width: 520px;
-    line-height: 1.7;
-    opacity: 0;
-    animation: fadeUp 0.9s ease forwards 0.6s;
-  }
-
-  .hero-actions {
-    margin-top: 48px;
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    opacity: 0;
-    animation: fadeUp 0.9s ease forwards 0.8s;
-  }
-
-  .btn-primary {
-    display: inline-block;
-    background: var(--accent);
-    color: var(--cream);
-    padding: 16px 32px;
-    font-family: var(--font-ui);
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 2px;
-    transition: background 0.2s, transform 0.2s;
-    cursor: pointer;
-    border: none;
-  }
-
-  .btn-primary:hover { background: var(--accent-light); transform: translateY(-1px); }
-
-  .hero-scroll {
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--cream-muted);
-  }
-
-  /* ── SEZIONE GENERICA ── */
-  section {
-    padding: 100px 40px;
-    border-top: 1px solid var(--border);
-  }
-
-  .section-label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 16px;
-  }
-
-  .section-title {
-    font-family: var(--font-display);
-    font-size: clamp(36px, 4vw, 56px);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -1px;
-    max-width: 700px;
-  }
-
-  .section-title em {
-    font-style: italic;
-    font-weight: 300;
-    color: var(--cream-muted);
-  }
-
-  /* ── PER CHI ── */
-  .perchi-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    margin-top: 60px;
-    border: 1px solid var(--border);
-  }
-
-  .perchi-card {
-    background: var(--bg);
-    padding: 40px 32px;
-    transition: background 0.2s;
-  }
-
-  .perchi-card:hover { background: var(--bg2); }
-
-  .perchi-num {
-    font-family: var(--font-display);
-    font-size: 48px;
-    font-weight: 700;
-    color: var(--accent);
-    opacity: 0.4;
-    line-height: 1;
-    margin-bottom: 16px;
-  }
-
-  .perchi-card h3 {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 12px;
-  }
-
-  .perchi-card p {
-    font-size: 15px;
-    color: var(--cream-muted);
-    line-height: 1.6;
-  }
-
-  /* ── OGGI ── */
-  .oggi-wrap {
-    margin-top: 60px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-  }
-
-  .oggi-badge {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    background: rgba(201,95,40,0.15);
-    color: var(--accent-light);
-    border: 1px solid rgba(201,95,40,0.3);
-    padding: 6px 14px;
-    border-radius: 2px;
-    margin-bottom: 24px;
-  }
-
-  .oggi-title {
-    font-family: var(--font-display);
-    font-size: 40px;
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -1px;
-    margin-bottom: 20px;
-  }
-
-  .oggi-desc {
-    font-size: 16px;
-    color: var(--cream-muted);
-    line-height: 1.7;
-    margin-bottom: 32px;
-  }
-
-  .oggi-features {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .oggi-features li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 15px;
-    color: var(--cream-muted);
-  }
-
-  .oggi-features li::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .oggi-visual {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 32px;
-    aspect-ratio: 4/3;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    justify-content: center;
-  }
-
-  .mock-row {
-    height: 10px;
-    border-radius: 2px;
-    background: rgba(240,234,216,0.08);
-  }
-
-  .mock-row.accent { background: rgba(201,95,40,0.25); width: 60%; }
-  .mock-row.short { width: 40%; }
-  .mock-row.med { width: 75%; }
-
-  .mock-header {
-    height: 36px;
-    border-radius: 2px;
-    background: rgba(240,234,216,0.05);
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    padding: 0 12px;
-    gap: 8px;
-  }
-
-  .mock-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: rgba(201,95,40,0.5);
-  }
-
-  .mock-line {
-    height: 8px;
-    border-radius: 2px;
-    background: rgba(240,234,216,0.12);
-    width: 120px;
-  }
-
-  /* ── ROADMAP ── */
-  .roadmap-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    margin-top: 60px;
-  }
-
-  .roadmap-item {
-    background: var(--bg);
-    padding: 36px 28px;
-    position: relative;
-  }
-
-  .roadmap-item.coming {
-    opacity: 0.5;
-  }
-
-  .roadmap-status {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
-
-  .roadmap-status.live { color: #4ade80; }
-  .roadmap-status.soon { color: var(--accent-light); }
-  .roadmap-status.future { color: var(--cream-muted); }
-
-  .roadmap-item h3 {
-    font-family: var(--font-display);
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 12px;
-    letter-spacing: -0.5px;
-  }
-
-  .roadmap-item p {
-    font-size: 14px;
-    color: var(--cream-muted);
-    line-height: 1.6;
-  }
-
-  /* ── EMAIL ── */
-  .email-section {
-    background: var(--bg2);
-    text-align: center;
-    padding: 120px 40px;
-  }
-
-  .email-section .section-title {
-    margin: 0 auto 16px;
-    max-width: 600px;
-  }
-
-  .email-section .section-sub {
-    font-size: 17px;
-    color: var(--cream-muted);
-    max-width: 480px;
-    margin: 0 auto 48px;
-    line-height: 1.7;
-  }
-
-  .email-form {
-    display: flex;
-    gap: 0;
-    max-width: 480px;
-    margin: 0 auto;
-  }
-
-  .email-input {
-    flex: 1;
-    background: rgba(240,234,216,0.06);
-    border: 1px solid var(--border);
-    border-right: none;
-    color: var(--cream);
-    font-family: var(--font-ui);
-    font-size: 15px;
-    padding: 16px 20px;
-    outline: none;
-    border-radius: 2px 0 0 2px;
-    transition: border-color 0.2s;
-  }
-
-  .email-input::placeholder { color: var(--cream-muted); }
-  .email-input:focus { border-color: var(--accent); }
-
-  .email-btn {
-    background: var(--accent);
-    color: var(--cream);
-    border: none;
-    font-family: var(--font-ui);
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 16px 28px;
-    cursor: pointer;
-    border-radius: 0 2px 2px 0;
-    transition: background 0.2s;
-    white-space: nowrap;
-  }
-
-  .email-btn:hover { background: var(--accent-light); }
-
-  .email-note {
-    font-size: 12px;
-    color: var(--cream-muted);
-    margin-top: 16px;
-    opacity: 0.7;
-  }
-
-  .email-success {
-    display: none;
-    font-family: var(--font-display);
-    font-size: 24px;
-    font-style: italic;
-    color: var(--cream);
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    padding: 40px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 13px;
-    color: var(--cream-muted);
-  }
-
-  .footer-logo {
-    font-family: var(--font-display);
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--cream);
-  }
-
-  .footer-logo span { color: var(--accent); }
-
-  /* ── ANIMAZIONI ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    nav { padding: 20px 24px; }
-    .hero { padding: 0 24px 60px; }
-    section { padding: 72px 24px; }
-    .perchi-grid { grid-template-columns: 1fr; }
-    .oggi-wrap { grid-template-columns: 1fr; gap: 40px; }
-    .roadmap-grid { grid-template-columns: 1fr 1fr; }
-    .email-form { flex-direction: column; }
-    .email-input { border-right: 1px solid var(--border); border-bottom: none; border-radius: 2px 2px 0 0; }
-    .email-btn { border-radius: 0 0 2px 2px; }
-    footer { flex-direction: column; gap: 16px; text-align: center; }
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--cream);font-family:var(--body);font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none;}
+  @media (pointer:coarse){body{cursor:auto;}#cur,#dot{display:none;}}
+  #gl{position:fixed;inset:0;z-index:0;width:100vw;height:100vh;display:block;background:radial-gradient(60% 60% at 60% 40%,#d4612e33,#0a0907);}
+  .scrim{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 90% at 50% 120%,rgba(10,9,7,.9),transparent 55%),linear-gradient(to bottom,rgba(10,9,7,.5),transparent 22%,transparent 66%,var(--bg) 100%);}
+  body::after{content:'';position:fixed;inset:0;z-index:9997;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  #cur{position:fixed;width:36px;height:36px;border:1px solid var(--cream);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:9999;mix-blend-mode:difference;transition:width .2s,height .2s,background .2s;}
+  #dot{position:fixed;width:5px;height:5px;background:var(--cream);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:9999;mix-blend-mode:difference;}
+  #cur.grow{width:70px;height:70px;background:rgba(239,236,228,.1);}
+  .wrap{position:relative;z-index:3;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:24px 5vw;display:flex;justify-content:space-between;align-items:center;}
+  .logo{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:-.04em;display:flex;align-items:center;gap:10px;}
+  .logo .mk{width:12px;height:12px;background:var(--terra);border-radius:50% 50% 50% 0;transform:rotate(-15deg);box-shadow:0 0 18px var(--terra-hi);}
+  .nav-meta{font-family:var(--mono);font-size:11px;color:var(--cream);letter-spacing:.05em;opacity:.8;}
+  .nav-meta b{color:var(--mint);}
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 5vw;position:relative;z-index:3;}
+  .tag{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--cream);display:inline-flex;align-items:center;gap:12px;margin-bottom:30px;opacity:0;animation:fade .6s var(--ease) forwards .15s;}
+  .tag::before{content:'';width:42px;height:1px;background:var(--terra-hi);}
+  .title{font-family:var(--display);font-weight:800;font-size:clamp(54px,9.4vw,158px);line-height:.9;letter-spacing:-.05em;text-shadow:0 8px 60px rgba(0,0,0,.5);}
+  .title .it{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--terra-hi);}
+  .title .scr{display:inline-block;}
+  .sub{margin-top:34px;max-width:46ch;font-size:clamp(16px,1.4vw,20px);color:rgba(239,236,228,.82);line-height:1.7;opacity:0;animation:fade .6s var(--ease) forwards .7s;}
+  .cta-row{margin-top:42px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;opacity:0;animation:fade .6s var(--ease) forwards .85s;}
+  @keyframes fade{to{opacity:1;}}
+  .btn{font-family:var(--body);font-weight:600;font-size:15px;text-decoration:none;padding:17px 34px;border-radius:100px;display:inline-block;border:1px solid rgba(239,236,228,.25);transition:transform .25s var(--ease),background .25s,color .25s,box-shadow .25s;will-change:transform;}
+  .btn.solid{background:var(--terra);color:#fff;border-color:var(--terra);}
+  .btn.solid:hover{background:var(--terra-hi);box-shadow:0 16px 50px -10px rgba(255,125,63,.7);}
+  .btn.ghost{color:var(--cream);background:rgba(239,236,228,.04);backdrop-filter:blur(4px);}
+  .btn.ghost:hover{background:var(--cream);color:var(--bg);}
+  .shint{position:absolute;bottom:34px;left:5vw;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:rgba(239,236,228,.6);display:flex;align-items:center;gap:10px;opacity:0;animation:fade .6s var(--ease) forwards 1.1s;}
+  .shint .bar{width:1px;height:40px;background:linear-gradient(var(--terra-hi),transparent);animation:drop 1.6s ease infinite;}
+  @keyframes drop{0%,100%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}}
+  .solid{background:var(--bg);position:relative;transform-origin:center top;will-change:transform;}
+  .marq{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;overflow:hidden;white-space:nowrap;background:var(--bg2);}
+  .marq-t{display:inline-flex;will-change:transform;}
+  .marq-i{font-family:var(--display);font-weight:700;font-size:30px;letter-spacing:-.02em;padding:0 36px;display:inline-flex;align-items:center;gap:36px;color:var(--cream);}
+  .marq-i::after{content:'✦';color:var(--terra-hi);font-size:16px;}
+  .stage{padding:13vh 5vw;}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra-hi);margin-bottom:18px;}
+  .h2{font-family:var(--display);font-weight:800;font-size:clamp(32px,4.6vw,64px);line-height:1;letter-spacing:-.04em;max-width:15ch;}
+  .h2 .it{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--muted);}
+  .stage-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:42px;}
+  .persp{perspective:1400px;}
+  .scheduler{background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 50px 100px -50px #000;transition:transform .15s ease-out;transform-style:preserve-3d;will-change:transform;}
+  .sch-bar{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid var(--line);background:var(--bg2);gap:16px;flex-wrap:wrap;}
+  .left{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:13px;}
+  .traffic{display:flex;gap:7px;}.traffic i{width:11px;height:11px;border-radius:50%;}
+  .traffic i:nth-child(1){background:#ff5f56}.traffic i:nth-child(2){background:#ffbd2e}.traffic i:nth-child(3){background:#27c93f}
+  .sch-right{display:flex;align-items:center;gap:16px;}
+  .regen{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--cream);background:rgba(212,97,46,.18);border:1px solid rgba(212,97,46,.4);padding:8px 16px;border-radius:100px;cursor:none;transition:background .2s,transform .2s;}
+  .regen:hover{background:var(--terra);transform:translateY(-1px);}.regen:disabled{opacity:.4;}
+  .sch-status{font-family:var(--mono);font-size:12px;color:var(--mint);display:flex;align-items:center;gap:8px;white-space:nowrap;}
+  .sch-status .d{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint);animation:bl 1.2s infinite;}
+  @keyframes bl{50%{opacity:.3;}}
+  .grid{display:grid;grid-template-columns:120px repeat(7,1fr);}
+  .gc{padding:13px 10px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:54px;font-size:13px;display:flex;align-items:center;}
+  .gc.head{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--bg2);justify-content:center;}
+  .gc.name{font-weight:600;font-size:13px;}.gc.name .role{display:block;font-family:var(--mono);font-size:10px;color:var(--muted);font-weight:400;}
+  .gc.slot{justify-content:center;}
+  .gc.slot.off{background:repeating-linear-gradient(45deg,transparent,transparent 6px,rgba(239,236,228,.02) 6px,rgba(239,236,228,.02) 12px);}
+  .shift{font-family:var(--mono);font-size:11px;font-weight:700;padding:6px 9px;border-radius:7px;opacity:0;transform:scale(.5);transition:opacity .28s var(--ease),transform .28s var(--ease),box-shadow .3s,background .3s,color .3s;}
+  .shift.on{opacity:1;transform:scale(1);}
+  .shift.m{background:rgba(98,230,196,.14);color:var(--mint);border:1px solid rgba(98,230,196,.3);}
+  .shift.p{background:rgba(212,97,46,.16);color:var(--terra-hi);border:1px solid rgba(212,97,46,.35);}
+  .shift.opt{background:var(--terra);color:#fff;box-shadow:0 0 24px rgba(255,125,63,.8);transform:scale(1.14);}
+  .ai-line{font-family:var(--mono);font-size:13px;color:var(--muted);padding:16px 24px;min-height:52px;display:flex;align-items:center;}
+  .ai-line b{color:var(--terra-hi);}.ai-line .spark{color:var(--mint);}
+  .sch-foot{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);}
+  .metric{padding:22px 24px;border-right:1px solid var(--line);}.metric:last-child{border-right:none;}
+  .metric .lab{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em;margin-bottom:8px;text-transform:uppercase;}
+  .metric .val{font-family:var(--display);font-weight:800;font-size:30px;letter-spacing:-.03em;display:flex;align-items:baseline;gap:8px;}
+  .metric .val .delta{font-family:var(--mono);font-size:13px;font-weight:700;}
+  .delta.up{color:var(--mint);}.delta.down{color:var(--terra-hi);}
+  .stats{padding:11vh 5vw;display:grid;grid-template-columns:repeat(3,1fr);gap:40px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .stat .n{font-family:var(--display);font-weight:800;font-size:clamp(48px,6vw,92px);letter-spacing:-.05em;line-height:1;background:linear-gradient(120deg,var(--cream),var(--terra-hi));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .stat .l{font-family:var(--mono);font-size:13px;color:var(--muted);margin-top:14px;}
+  .road{margin-top:46px;border-top:1px solid var(--line);}
+  .rr{display:grid;grid-template-columns:80px 1fr auto;gap:28px;align-items:baseline;padding:32px 0;border-bottom:1px solid var(--line);transition:padding-left .3s var(--ease),background .3s;}
+  .rr:hover{padding-left:18px;background:linear-gradient(to right,rgba(212,97,46,.08),transparent);}
+  .rr .ix{font-family:var(--mono);font-size:13px;color:var(--muted);}
+  .rr h3{font-family:var(--display);font-weight:800;font-size:clamp(26px,3vw,42px);letter-spacing:-.03em;}
+  .rr.dim h3{-webkit-text-stroke:1px var(--cream);-webkit-text-fill-color:transparent;}
+  .rr p{font-size:14px;color:var(--muted);max-width:40ch;margin-top:6px;}
+  .st{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:6px 14px;border-radius:100px;white-space:nowrap;}
+  .st.live{background:rgba(98,230,196,.16);color:var(--mint);}.st.soon{background:rgba(212,97,46,.18);color:var(--terra-hi);}.st.next{background:rgba(239,236,228,.06);color:var(--muted);}
+  .end{margin:0 5vw 6vw;border:1px solid var(--line);border-radius:28px;padding:13vh 6vw;text-align:center;position:relative;overflow:hidden;background:var(--bg2);}
+  .end::before{content:'';position:absolute;inset:0;background:radial-gradient(70% 80% at 50% -10%,rgba(212,97,46,.32),transparent 60%);}
+  .end>*{position:relative;}
+  .end h2{font-family:var(--display);font-weight:800;font-size:clamp(40px,6.5vw,96px);line-height:.95;letter-spacing:-.05em;margin-bottom:20px;}
+  .end h2 .it{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--terra-hi);}
+  .end p{color:var(--muted);max-width:42ch;margin:0 auto 42px;font-size:17px;}
+  .ef{display:flex;max-width:440px;margin:0 auto;gap:10px;}
+  .ef input{flex:1;background:rgba(239,236,228,.05);border:1px solid var(--line);color:var(--cream);font-family:var(--body);font-size:15px;padding:17px 22px;border-radius:100px;outline:none;transition:border-color .2s;}
+  .ef input:focus{border-color:var(--terra-hi);}
+  .ef button{background:var(--terra);color:#fff;border:none;font-family:var(--body);font-weight:600;font-size:15px;padding:17px 30px;border-radius:100px;cursor:none;transition:background .2s;}
+  .ef button:hover{background:var(--terra-hi);}
+  footer{padding:6vh 5vw;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-family:var(--mono);font-size:12px;color:var(--muted);}
+  /* CHI C'È DIETRO */
+  .who{padding:13vh 5vw;display:grid;grid-template-columns:1fr .82fr;gap:6vw;align-items:center;border-top:1px solid var(--line);}
+  .who h2{font-family:var(--display);font-weight:800;font-size:clamp(30px,4vw,56px);line-height:1.02;letter-spacing:-.04em;margin-bottom:26px;}
+  .who h2 .it{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--terra-hi);}
+  .who p{font-size:17px;color:var(--muted);line-height:1.8;margin-bottom:18px;max-width:48ch;}
+  .who-sign{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--cream);margin-top:6px;}
+  .who-photo{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);aspect-ratio:3/4;box-shadow:0 40px 90px -50px #000;}
+  .who-photo img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(.12) contrast(1.03);}
+  .who-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(10,9,7,.55),transparent 50%);pointer-events:none;}
+  /* FORM REALE */
+  .ef2{max-width:480px;margin:0 auto;}
+  .ef2 .row{display:flex;margin-bottom:14px;}
+  .ef2 input[type=email]{flex:1;background:rgba(239,236,228,.05);border:1px solid var(--line);color:var(--cream);font-family:var(--body);font-size:15px;padding:17px 22px;border-radius:100px;outline:none;transition:border-color .2s;}
+  .ef2 input[type=email]:focus{border-color:var(--terra-hi);}
+  .choices{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;}
+  .choice{display:flex;align-items:center;gap:10px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;cursor:none;transition:border-color .2s,background .2s;font-size:14px;text-align:left;background:rgba(239,236,228,.03);line-height:1.35;}
+  .choice b{color:var(--cream);} .choice input{accent-color:var(--terra);width:16px;height:16px;flex-shrink:0;}
+  .choice.sel{border-color:var(--terra);background:rgba(212,97,46,.1);}
+  .ef2 .submit{width:100%;background:var(--terra);color:#fff;border:none;font-family:var(--body);font-weight:600;font-size:15px;padding:17px;border-radius:100px;cursor:none;transition:background .2s,transform .25s var(--ease);}
+  .ef2 .submit:hover{background:var(--terra-hi);} .ef2 .submit:disabled{opacity:.6;}
+  .note{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:16px;opacity:.7;}
+  .success{display:none;font-family:var(--serif);font-style:italic;font-size:24px;color:var(--mint);margin-top:8px;}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .5s var(--ease),transform .5s var(--ease);}
+  .reveal.in{opacity:1;transform:none;}
+  @media(max-width:900px){
+    .stats{grid-template-columns:1fr;gap:32px;}
+    .rr{grid-template-columns:1fr;gap:6px;}.rr .st{justify-self:start;}
+    .grid{grid-template-columns:80px repeat(7,1fr);}.gc{padding:9px 5px;min-height:46px;}
+    .gc.name .role{display:none;}.shift{font-size:9px;padding:4px 5px;}
+    .sch-foot{grid-template-columns:1fr;}.metric{border-right:none;border-bottom:1px solid var(--line);}
+    .ef{flex-direction:column;}
+    .who{grid-template-columns:1fr;gap:42px;}
+    .who-photo{max-width:340px;}
+    .choices{grid-template-columns:1fr;}
   }
 </style>
 </head>
 <body>
+<canvas id="gl"></canvas>
+<div class="scrim"></div>
+<div id="cur"></div><div id="dot"></div>
 
-<!-- NAV -->
+<div class="wrap">
 <nav>
-  <div class="nav-logo">Retail<span>ab</span></div>
-  <a href="#entra" class="nav-cta">Entra in lista</a>
+  <div class="logo"><span class="mk"></span>Retailab</div>
+  <div class="nav-meta">sistema <b>online</b> · v1.0</div>
 </nav>
 
-<!-- HERO -->
-<section class="hero" style="border-top: none;">
-  <div class="hero-bg"></div>
-  <div style="position: relative;">
-    <p class="hero-tag">Retail × Intelligenza Artificiale</p>
-    <h1 class="hero-title">
-      Il retail sta cambiando.<br>
-      <em>Retailab è per chi vuole<br>capirlo prima.</em>
-    </h1>
-    <p class="hero-sub">
-      Una piattaforma dove tool concreti, una community attiva e formazione pratica
-      si incontrano per trasformare il modo in cui lavori nel retail.
-    </p>
-    <div class="hero-actions">
-      <a href="#entra" class="btn-primary">Voglio entrare</a>
-      <span class="hero-scroll">↓ Scopri di più</span>
-    </div>
+<header class="hero">
+  <span class="tag">Retail × Intelligenza Artificiale</span>
+  <h1 class="title">
+    <span class="scr" data-final="Il negozio">Il negozio</span><br>
+    <span class="scr" data-final="che ">che </span><span class="it">pensa</span><br>
+    <span class="scr" data-final="con te.">con te.</span>
+  </h1>
+  <p class="sub">Strumenti che lavorano davvero. Un'AI che conosce il banco, non solo i grafici.
+     Costruita da chi il retail lo fa ogni giorno — per chi lo fa ogni giorno.</p>
+  <div class="cta-row">
+    <a href="#entra" class="btn solid mag">Voglio entrare</a>
+    <a href="#demo" class="btn ghost mag">Guarda l'AI al lavoro ↓</a>
   </div>
-</section>
+  <div class="shint"><span class="bar"></span> SCROLL</div>
+</header>
 
-<!-- PER CHI -->
-<section id="perchi">
-  <p class="section-label reveal">Per chi è</p>
-  <h2 class="section-title reveal">Costruito da chi <em>vive il retail</em> sul campo.</h2>
-  <div class="perchi-grid reveal">
-    <div class="perchi-card">
-      <div class="perchi-num">01</div>
-      <h3>Retailer e manager</h3>
-      <p>Hai negozi, persone e numeri da gestire ogni giorno. Retailab ti dà strumenti concreti per lavorare meglio e decidere più velocemente.</p>
-    </div>
-    <div class="perchi-card">
-      <div class="perchi-num">02</div>
-      <h3>Area manager e responsabili</h3>
-      <p>Supervisioni più punti vendita e hai bisogno di analisi chiare, report utili e supporto nelle decisioni operative e strategiche.</p>
-    </div>
-    <div class="perchi-card">
-      <div class="perchi-num">03</div>
-      <h3>Chi vuole capire l'AI nel retail</h3>
-      <p>Sei curioso, vuoi imparare, vuoi sperimentare. Retailab è il posto giusto per farlo in modo pratico, senza teoria vuota.</p>
-    </div>
-  </div>
-</section>
+<div class="solid" id="solid">
+<div class="marq"><div class="marq-t" id="marq">
+  <span class="marq-i">Turni</span><span class="marq-i">Vendite</span><span class="marq-i">Community</span><span class="marq-i">Formazione</span><span class="marq-i">Area Manager</span><span class="marq-i">Punti vendita</span>
+  <span class="marq-i">Turni</span><span class="marq-i">Vendite</span><span class="marq-i">Community</span><span class="marq-i">Formazione</span><span class="marq-i">Area Manager</span><span class="marq-i">Punti vendita</span>
+</div></div>
 
-<!-- OGGI -->
-<section id="oggi">
-  <p class="section-label reveal">Cosa c'è oggi</p>
-  <div class="oggi-wrap">
+<section class="stage" id="demo">
+  <div class="stage-head">
     <div>
-      <div class="oggi-badge reveal">In test — accesso su richiesta</div>
-      <h2 class="oggi-title reveal">App turni<br>per negozi</h2>
-      <p class="oggi-desc reveal">
-        Il primo tool di Retailab. Gestisci turni, dipendenti e punti vendita in modo semplice.
-        Con AI già integrata che suggerisce gli orari ottimali basandosi sulle vendite e le attività settimanali.
-      </p>
-      <ul class="oggi-features reveal">
-        <li>Gestione turni settimanali per negozio</li>
-        <li>Vista calendario e stampa PDF</li>
-        <li>Export Excel e condivisione WhatsApp</li>
-        <li>AI integrata per suggerire turni ottimali</li>
-      </ul>
+      <p class="kicker reveal">App Turni · live</p>
+      <h2 class="h2 reveal">L'AI costruisce<br>la settimana. <span class="it">In diretta.</span></h2>
     </div>
-    <div class="reveal" style="border-radius:8px;overflow:hidden;border:1px solid rgba(240,234,216,0.1);box-shadow:0 20px 60px rgba(0,0,0,0.4);">
-      <img src="app-turni.jpg" alt="App turni Retailab" style="width:100%;display:block;">
-    </div>
+    <p class="reveal" style="font-size:15px;color:var(--muted);max-width:32ch;">Piazza i turni, poi ottimizza i picchi. Premi <b style="color:var(--terra-hi)">Rigenera</b> e guardala ripensare tutto.</p>
   </div>
-</section>
-
-<!-- ROADMAP -->
-<section id="roadmap">
-  <p class="section-label reveal">Cosa arriva</p>
-  <h2 class="section-title reveal">La piattaforma <em>cresce con te.</em></h2>
-  <div class="roadmap-grid reveal">
-    <div class="roadmap-item">
-      <p class="roadmap-status live">● Live</p>
-      <h3>App turni</h3>
-      <p>Gestione turni con AI. Il primo tool concreto già disponibile in test.</p>
-    </div>
-    <div class="roadmap-item coming">
-      <p class="roadmap-status soon">◐ Presto</p>
-      <h3>Community</h3>
-      <p>Idee, discussioni e proposte aperte. Le migliori diventano tool reali.</p>
-    </div>
-    <div class="roadmap-item coming">
-      <p class="roadmap-status future">○ In arrivo</p>
-      <h3>Lab</h3>
-      <p>Nuovi tool nati dalle idee della community. Freemium, subito utilizzabili.</p>
-    </div>
-    <div class="roadmap-item coming">
-      <p class="roadmap-status future">○ In arrivo</p>
-      <h3>Academy</h3>
-      <p>Corsi pratici su come usare l'AI nel retail. Zero teoria, tutto applicabile.</p>
-    </div>
-  </div>
-</section>
-
-<!-- CHI SONO -->
-<section id="chisono">
-  <p class="section-label reveal">Chi c'è dietro</p>
-  <div class="oggi-wrap">
-    <div class="reveal" style="display:flex; flex-direction:column; justify-content:center;">
-      <h2 class="section-title" style="margin-bottom:28px;">Sono Andrea.<br><em>Non sono un informatico.</em></h2>
-      <p style="font-size:17px; color:var(--cream-muted); line-height:1.8; margin-bottom:20px;">
-        Faccio l'area manager nel retail da anni. Gestisco negozi, persone, numeri, problemi reali — ogni giorno sul campo.
-      </p>
-      <p style="font-size:17px; color:var(--cream-muted); line-height:1.8; margin-bottom:20px;">
-        A un certo punto ho iniziato a usare l'intelligenza artificiale per lavorare meglio. Non perché fossi un tecnico — ma perché ero curioso e vedevo che poteva davvero aiutare.
-      </p>
-      <p style="font-size:17px; color:var(--cream-muted); line-height:1.8;">
-        Retailab nasce da lì: dalla voglia di condividere quello che sto imparando con chi lavora nel retail come me. Niente teoria, niente hype. Solo cose che funzionano davvero.
-      </p>
-    </div>
-    <div class="reveal" style="display:flex; align-items:center; justify-content:center;">
-      <div id="foto-placeholder" style="
-        width:100%;
-        max-width:360px;
-        aspect-ratio:3/4;
-        border-radius:4px;
-        border:1px solid var(--border);
-        background:var(--bg2);
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        overflow:hidden;
-      ">
-        <img id="foto-andrea" src="andrea.jpg" alt="Andrea" style="width:100%; height:100%; object-fit:cover; display:block;">
-        
+  <div class="persp">
+    <div class="scheduler reveal" id="card">
+      <div class="sch-bar">
+        <div class="left"><span class="traffic"><i></i><i></i><i></i></span> <span>turni · settimana 23 · Negozio Centro</span></div>
+        <div class="sch-right">
+          <button class="regen mag" id="regen">↻ Rigenera con l'AI</button>
+          <div class="sch-status"><span class="d"></span><span id="schState">pronto</span></div>
+        </div>
+      </div>
+      <div class="grid" id="grid"></div>
+      <p class="ai-line" id="aiLine"></p>
+      <div class="sch-foot">
+        <div class="metric"><div class="lab">Costo settimana</div><div class="val">€<span id="mCost">0</span> <span class="delta down" id="dCost"></span></div></div>
+        <div class="metric"><div class="lab">Copertura picchi</div><div class="val"><span id="mCov">0</span>% <span class="delta up" id="dCov"></span></div></div>
+        <div class="metric"><div class="lab">Tempo umano</div><div class="val"><span id="mTime">0</span> min <span class="delta down">risparmiati</span></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- EMAIL -->
-<section class="email-section" id="entra" style="border-top: 1px solid var(--border);">
-  <p class="section-label reveal" style="text-align:center;">Accesso anticipato</p>
-  <h2 class="section-title reveal">Vuoi entrare<br><em>prima degli altri?</em></h2>
-  <p class="section-sub reveal">
-    Retailab è in costruzione. Lascia la mail e sarai tra i primi ad accedere
-    ai tool, alla community e ai contenuti non appena saranno pronti.
-  </p>
+<section class="stats">
+  <div class="stat reveal"><div class="n" data-to="2" data-suf=" min">0</div><div class="l">per generare i turni di una settimana</div></div>
+  <div class="stat reveal"><div class="n" data-to="100" data-suf="%">0</div><div class="l">costruito da chi lavora nel retail</div></div>
+  <div class="stat reveal"><div class="n" data-to="0" data-pre="€">0</div><div class="l">per iniziare — accesso anticipato gratis</div></div>
+</section>
+
+<section class="stage">
+  <p class="kicker reveal">La piattaforma cresce con te</p>
+  <h2 class="h2 reveal">Una direzione, <span class="it">quattro tappe.</span></h2>
+  <div class="road">
+    <div class="rr reveal"><span class="ix">i.</span><div><h3>App Turni</h3><p>Turni con AI sui dati di vendita. Già in test.</p></div><span class="st live">● Live</span></div>
+    <div class="rr dim reveal"><span class="ix">ii.</span><div><h3>Community</h3><p>Idee e discussioni aperte. Le migliori diventano tool.</p></div><span class="st soon">◐ Presto</span></div>
+    <div class="rr dim reveal"><span class="ix">iii.</span><div><h3>Lab</h3><p>Strumenti nati dalla community. Freemium.</p></div><span class="st next">○ In arrivo</span></div>
+    <div class="rr dim reveal"><span class="ix">iv.</span><div><h3>Academy</h3><p>Corsi pratici sull'AI nel retail.</p></div><span class="st next">○ In arrivo</span></div>
+  </div>
+</section>
+
+<section class="who">
   <div class="reveal">
-    <form id="emailForm" onsubmit="handleSubmit(event)" style="max-width:480px;margin:0 auto;">
-      <div style="display:flex;gap:0;margin-bottom:16px;">
-        <input type="email" class="email-input" placeholder="La tua email" required id="emailInput" style="border-right:1px solid var(--border);border-radius:2px;">
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;">
-        <label id="label-app" style="display:flex;align-items:center;gap:10px;padding:14px 16px;border:1px solid var(--border);border-radius:2px;cursor:pointer;transition:all 0.2s;background:rgba(240,234,216,0.03);">
-          <input type="radio" name="interesse" value="app" id="radio-app" required style="accent-color:var(--accent);width:16px;height:16px;">
-          <span style="font-size:14px;line-height:1.4;">Voglio provare<br><strong>l'app turni</strong></span>
-        </label>
-        <label id="label-follow" style="display:flex;align-items:center;gap:10px;padding:14px 16px;border:1px solid var(--border);border-radius:2px;cursor:pointer;transition:all 0.2s;background:rgba(240,234,216,0.03);">
-          <input type="radio" name="interesse" value="follow" id="radio-follow" required style="accent-color:var(--accent);width:16px;height:16px;">
-          <span style="font-size:14px;line-height:1.4;">Voglio seguire<br><strong>il progetto</strong></span>
-        </label>
-      </div>
-      <button type="submit" class="email-btn" style="width:100%;border-radius:2px;padding:16px;">Entra in lista</button>
-    </form>
-    <p class="email-note">Niente spam. Solo aggiornamenti veri quando c'è qualcosa di concreto.</p>
-    <p class="email-success" id="emailSuccess">Perfetto — sei dentro. Ti aggiorniamo presto.</p>
+    <p class="kicker">Chi c'è dietro</p>
+    <h2>Sono Andrea.<br><span class="it">Non sono un informatico.</span></h2>
+    <p>Faccio l'area manager nel retail da anni. Gestisco negozi, persone, numeri, problemi reali — ogni giorno sul campo.</p>
+    <p>A un certo punto ho iniziato a usare l'intelligenza artificiale per lavorare meglio. Non perché fossi un tecnico, ma perché ero curioso e vedevo che poteva davvero aiutare.</p>
+    <p>Retailab nasce da lì: dalla voglia di condividere quello che sto imparando con chi lavora nel retail come me. Niente teoria, niente hype. Solo cose che funzionano davvero.</p>
+    <p class="who-sign">— Andrea</p>
+  </div>
+  <div class="who-photo reveal">
+    <img src="andrea.jpg" alt="Andrea, fondatore di Retailab" width="360" height="480" loading="lazy">
   </div>
 </section>
 
-<!-- FOOTER -->
+<section class="end" id="entra">
+  <h2>Entra <span class="it">prima</span><br>degli altri.</h2>
+  <p>Retailab è in costruzione. Lascia la mail: sarai tra i primi ad accedere ai tool, alla community e ai contenuti.</p>
+  <form class="ef2" id="emailForm" onsubmit="handleSubmit(event)">
+    <div class="row"><input type="email" id="emailInput" placeholder="La tua email" required aria-label="Email"></div>
+    <div class="choices">
+      <label class="choice" id="ch-app"><input type="radio" name="interesse" value="app" required> Voglio provare <b>l'app turni</b></label>
+      <label class="choice" id="ch-follow"><input type="radio" name="interesse" value="follow" required> Voglio seguire <b>il progetto</b></label>
+    </div>
+    <button type="submit" class="submit mag">Entra in lista</button>
+  </form>
+  <p class="note">Niente spam. Solo aggiornamenti veri quando c'è qualcosa di concreto.</p>
+  <p class="success" id="emailSuccess">Perfetto — sei dentro. ✦</p>
+</section>
+
 <footer>
-  <div class="footer-logo">Retail<span>ab</span></div>
-  <p>© 2026 Retailab · retailab.it</p>
-  <p>Fatto con curiosità e intelligenza artificiale.</p>
+  <div class="logo" style="color:var(--cream);font-size:16px;"><span class="mk"></span>Retailab</div>
+  <div>© <span id="yr"></span> Retailab · retailab.it</div>
+  <div>fatto con curiosità + AI</div>
 </footer>
+</div>
+</div>
 
 <script>
-  // Reveal on scroll
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
+document.getElementById('yr').textContent=new Date().getFullYear();
 
-  // Highlight radio selezionato
-  document.querySelectorAll('input[name="interesse"]').forEach(radio => {
-    radio.addEventListener('change', () => {
-      document.getElementById('label-app').style.borderColor = 'var(--border)';
-      document.getElementById('label-follow').style.borderColor = 'var(--border)';
-      document.getElementById('label-app').style.background = 'rgba(240,234,216,0.03)';
-      document.getElementById('label-follow').style.background = 'rgba(240,234,216,0.03)';
-      const sel = document.querySelector('input[name="interesse"]:checked');
-      if (sel) {
-        document.getElementById('label-' + sel.value).style.borderColor = 'var(--accent)';
-        document.getElementById('label-' + sel.value).style.background = 'rgba(201,95,40,0.08)';
-      }
-    });
-  });
+/* ════ WEBGL ottimizzato (4 ottave, buffer 0.66x, mouse reattivo) ════ */
+(function(){
+  const cv=document.getElementById('gl');
+  const gl=cv.getContext('webgl',{antialias:false,powerPreference:'high-performance'})||cv.getContext('experimental-webgl');
+  if(!gl)return;
+  const vs=`attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}`;
+  const fs=`precision mediump float;uniform vec2 u_res;uniform float u_time;uniform vec2 u_mouse;
+  vec2 hash(vec2 p){p=vec2(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3)));return -1.+2.*fract(sin(p)*43758.5453123);}
+  float noise(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);
+    return mix(mix(dot(hash(i),f),dot(hash(i+vec2(1,0)),f-vec2(1,0)),u.x),
+               mix(dot(hash(i+vec2(0,1)),f-vec2(0,1)),dot(hash(i+vec2(1,1)),f-vec2(1,1)),u.x),u.y);}
+  float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<4;i++){v+=a*noise(p);p*=2.03;a*=.5;}return v;}
+  void main(){
+    vec2 uv=gl_FragCoord.xy/u_res.xy;vec2 p=uv;p.x*=u_res.x/u_res.y;p*=1.7;
+    float t=u_time*0.09;vec2 m=(u_mouse-0.5)*0.9;
+    vec2 q=vec2(fbm(p+t),fbm(p+vec2(5.2,1.3)-t));
+    vec2 r=vec2(fbm(p+1.7*q+m+vec2(1.7,9.2)+0.2*t),fbm(p+1.7*q+m+vec2(8.3,2.8)-0.16*t));
+    float f=fbm(p+2.0*r);
+    vec3 c1=vec3(0.039,0.035,0.027),c2=vec3(0.83,0.38,0.18),c3=vec3(1.0,0.49,0.247),c4=vec3(0.937,0.925,0.894);
+    vec3 col=mix(c1,c2,clamp(f*f*2.3,0.,1.));
+    col=mix(col,c3,clamp(length(r),0.,1.)*0.7);
+    col=mix(col,c4,clamp(q.x*q.x*1.4,0.,1.)*0.22);
+    float vig=smoothstep(1.35,0.25,length(uv-0.5));col*=vig*1.13;
+    gl_FragColor=vec4(col,1.0);
+  }`;
+  function sh(t,s){const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return o;}
+  const pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,vs));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(pr);gl.useProgram(pr);
+  const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+  const loc=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  const uR=gl.getUniformLocation(pr,'u_res'),uT=gl.getUniformLocation(pr,'u_time'),uM=gl.getUniformLocation(pr,'u_mouse');
+  let mx=.5,my=.5,tmx=.5,tmy=.5,vis=true;
+  addEventListener('mousemove',e=>{tmx=e.clientX/innerWidth;tmy=1-e.clientY/innerHeight;},{passive:true});
+  const SCALE=0.66;
+  function rs(){cv.width=Math.floor(innerWidth*SCALE);cv.height=Math.floor(innerHeight*SCALE);gl.viewport(0,0,cv.width,cv.height);}
+  rs();addEventListener('resize',rs);
+  new IntersectionObserver(es=>{vis=es[0].isIntersecting;},{threshold:0}).observe(document.querySelector('.hero'));
+  const t0=performance.now();
+  (function r(now){
+    if(vis){mx+=(tmx-mx)*.14;my+=(tmy-my)*.14;
+      gl.uniform2f(uR,cv.width,cv.height);gl.uniform1f(uT,(now-t0)/1000);gl.uniform2f(uM,mx,my);
+      gl.drawArrays(gl.TRIANGLES,0,3);}
+    requestAnimationFrame(r);
+  })(t0);
+})();
 
-  // Email form
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const email = document.getElementById('emailInput').value;
-    const interesse = document.querySelector('input[name="interesse"]:checked')?.value;
-    const btn = document.querySelector('.email-btn');
-    btn.textContent = 'Iscrizione...';
-    btn.disabled = true;
+/* ════ CURSORE reattivo ════ */
+const cur=document.getElementById('cur'),dot=document.getElementById('dot');
+let cx=innerWidth/2,cy=innerHeight/2,tx=cx,ty=cy;
+addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY;dot.style.left=tx+'px';dot.style.top=ty+'px';},{passive:true});
+(function l(){cx+=(tx-cx)*.35;cy+=(ty-cy)*.35;cur.style.left=cx+'px';cur.style.top=cy+'px';requestAnimationFrame(l);})();
+document.querySelectorAll('a,button,input').forEach(el=>{el.addEventListener('mouseenter',()=>cur.classList.add('grow'));el.addEventListener('mouseleave',()=>cur.classList.remove('grow'));});
 
-    try {
-      const res = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, interesse })
-      });
-      if (res.ok) {
-        document.getElementById('emailForm').style.display = 'none';
-        document.querySelector('.email-note').style.display = 'none';
-        document.getElementById('emailSuccess').style.display = 'block';
-        document.getElementById('emailSuccess').textContent = interesse === 'app'
-          ? 'Perfetto — ti contatteremo presto per darti accesso.'
-          : 'Perfetto — sei dentro. Ti aggiorniamo quando c\'è qualcosa di nuovo.';
-      } else {
-        btn.textContent = 'Riprova';
-        btn.disabled = false;
-      }
-    } catch (err) {
-      btn.textContent = 'Riprova';
-      btn.disabled = false;
-    }
-  }
+/* ════ MAGNETIC ════ */
+document.querySelectorAll('.mag').forEach(bn=>{
+  bn.addEventListener('mousemove',e=>{const r=bn.getBoundingClientRect();bn.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.25}px,${(e.clientY-r.top-r.height/2)*.4}px)`;});
+  bn.addEventListener('mouseleave',()=>bn.style.transform='');
+});
+
+/* ════ SCROLL-VELOCITY: skew sezioni + marquee cinetico ════ */
+const solid=document.getElementById('solid'),marq=document.getElementById('marq');
+let lastY=scrollY,vel=0,marqX=0;
+(function tick(){
+  const y=scrollY,dy=y-lastY;lastY=y;
+  vel+=(dy-vel)*0.25;
+  const sk=Math.max(-7,Math.min(7,vel*0.35));
+  solid.style.transform=`skewY(${sk}deg)`;
+  marqX-=1.1+Math.abs(vel)*0.35;            // il marquee accelera con lo scroll
+  if(marqX<=-50)marqX+=50;
+  marq.style.transform=`translateX(${marqX}%)`;
+  requestAnimationFrame(tick);
+})();
+
+/* ════ CARD TILT 3D ════ */
+const card=document.getElementById('card');
+card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();
+  const rx=((e.clientY-r.top)/r.height-0.5)*-5,ry=((e.clientX-r.left)/r.width-0.5)*5;
+  card.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`;});
+card.addEventListener('mouseleave',()=>card.style.transform='');
+
+/* ════ SCRAMBLE veloce ════ */
+const GLYPH='ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&@/\\<>*';
+document.querySelectorAll('.scr').forEach((el,k)=>{const fin=el.dataset.final;
+  const start=()=>{let it=0;const iv=setInterval(()=>{
+    el.textContent=fin.split('').map((ch,i)=>ch===' '?' ':(i<it?fin[i]:GLYPH[Math.floor(Math.random()*GLYPH.length)])).join('');
+    it+=0.8;if(it>fin.length){clearInterval(iv);el.textContent=fin;}},18);};
+  setTimeout(start,150+k*120);
+});
+
+/* ════ REVEAL + triggers ════ */
+const io=new IntersectionObserver(es=>es.forEach((e,i)=>{
+  if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*45);io.unobserve(e.target);
+    if(e.target.classList.contains('scheduler'))buildSchedule(0);
+    if(e.target.classList.contains('stat'))countUp(e.target.querySelector('.n'));}
+}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+function countUp(el){const to=+el.dataset.to,pre=el.dataset.pre||'',suf=el.dataset.suf||'';let s=0;
+  const st=()=>{s+=Math.max(1,to/28);if(s>=to)s=to;el.textContent=pre+Math.round(s)+suf;if(s<to)requestAnimationFrame(st);};st();}
+
+/* ════ SCHEDULER ════ */
+const DAYS=['Lun','Mar','Mer','Gio','Ven','Sab','Dom'];
+const STAFF=[{n:'Giulia',r:'full-time'},{n:'Marco',r:'part-time'},{n:'Sara',r:'full-time'},{n:'Luca',r:'weekend'}];
+const LABELS={m:'9–14',p:'14–20'};
+const PLANS=[
+  [['m','m','','m','p','p',''],['p','','p','p','m','m',''],['m','p','m','','p','','p'],['','','','','m','p','p']],
+  [['m','','m','p','m','p','p'],['p','m','','m','','m',''],['','p','p','m','p','','m'],['','','m','','p','p','']],
+  [['p','m','m','','p','m',''],['m','p','','p','m','','p'],['','','p','m','','p','m'],['m','','','','p','p','p']]
+];
+const SCEN=[
+  {msg:'Sabato sera sotto del 30%. Sposto due pomeriggi e taglio un\'apertura morta del lunedì…',cost:[1480,1255],cov:[71,94],time:48,dc:'−15%',dv:'+23'},
+  {msg:'Picco del venerdì scoperto. Anticipo Sara e bilancio il part-time di Marco…',cost:[1520,1310],cov:[68,91],time:52,dc:'−14%',dv:'+23'},
+  {msg:'Mercoledì sovra-staffato, weekend corto. Ridistribuisco e libero 5 ore…',cost:[1445,1230],cov:[73,96],time:44,dc:'−15%',dv:'+23'}
+];
+let running=false,planIdx=0;
+function cell(c,t){const d=document.createElement('div');d.className=c;if(t)d.textContent=t;return d;}
+function buildSchedule(idx){
+  if(running)return;running=true;planIdx=idx;
+  const plan=PLANS[idx],scen=SCEN[idx],g=document.getElementById('grid');g.innerHTML='';
+  document.getElementById('regen').disabled=true;document.getElementById('aiLine').innerHTML='';
+  document.getElementById('dCost').textContent='';document.getElementById('dCov').textContent='';
+  const ss=document.getElementById('schState');ss.textContent='elaboro…';ss.style.color='var(--mint)';
+  g.appendChild(cell('gc head',''));DAYS.forEach(d=>g.appendChild(cell('gc head',d)));
+  const shifts=[];
+  STAFF.forEach((s,ri)=>{const nc=cell('gc name','');nc.innerHTML=`${s.n}<span class="role">${s.r}</span>`;g.appendChild(nc);
+    plan[ri].forEach(p=>{const c=cell('gc slot'+(p?'':' off'),'');
+      if(p){const sh=document.createElement('span');sh.className='shift '+p;sh.textContent=LABELS[p];c.appendChild(sh);shifts.push(sh);}
+      g.appendChild(c);});});
+  rampMetric('mCost',0,scen.cost[0],600);rampMetric('mCov',0,scen.cov[0],600);rampMetric('mTime',0,0,1);
+  let i=0;const fill=()=>{if(i<shifts.length){shifts[i++].classList.add('on');setTimeout(fill,42);}else setTimeout(()=>optimize(scen,shifts),420);};
+  setTimeout(fill,160);
+  setTimeout(()=>ss.textContent='turni base pronti',850);
+}
+function optimize(scen,shifts){
+  document.getElementById('schState').textContent='ottimizzo i picchi…';
+  typeLine('<b>AI</b>&nbsp; '+scen.msg+' <span class="spark">✦ fatto.</span>',()=>{
+    const ps=shifts.filter(s=>s.classList.contains('p'));
+    [ps[ps.length-1],ps[0]].forEach((el,k)=>{if(el)setTimeout(()=>{el.classList.add('opt');setTimeout(()=>el.classList.remove('opt'),1300);},k*180);});
+    rampMetric('mCost',scen.cost[0],scen.cost[1],750);document.getElementById('dCost').textContent=scen.dc;
+    rampMetric('mCov',scen.cov[0],scen.cov[1],750);document.getElementById('dCov').textContent=scen.dv;
+    rampMetric('mTime',0,scen.time,750);
+    document.getElementById('schState').textContent='ottimizzato ✓';
+    document.getElementById('regen').disabled=false;running=false;});
+}
+function rampMetric(id,from,to,dur){const el=document.getElementById(id),t0=performance.now();
+  const st=t=>{const k=Math.min(1,(t-t0)/dur);el.textContent=Math.round(from+(to-from)*(1-Math.pow(1-k,3))).toLocaleString('it-IT');if(k<1)requestAnimationFrame(st);};requestAnimationFrame(st);}
+function typeLine(html,done){const tmp=document.createElement('div');tmp.innerHTML=html;const plain=tmp.textContent;const el=document.getElementById('aiLine');let i=0;
+  const t=()=>{el.textContent=plain.slice(0,i++);if(i<=plain.length)setTimeout(t,9);else{el.innerHTML=html;done&&done();}};t();}
+document.getElementById('regen').addEventListener('click',()=>buildSchedule((planIdx+1)%PLANS.length));
+
+/* ════ FORM ISCRIZIONE → backend (Brevo + Telegram) ════ */
+document.querySelectorAll('input[name="interesse"]').forEach(r=>r.addEventListener('change',()=>{
+  document.getElementById('ch-app').classList.remove('sel');
+  document.getElementById('ch-follow').classList.remove('sel');
+  const s=document.querySelector('input[name="interesse"]:checked');
+  if(s)document.getElementById('ch-'+s.value).classList.add('sel');
+}));
+async function handleSubmit(e){
+  e.preventDefault();
+  const email=document.getElementById('emailInput').value;
+  const sel=document.querySelector('input[name="interesse"]:checked');
+  const interesse=sel?sel.value:null;
+  const btn=document.querySelector('.ef2 .submit');
+  btn.textContent='Iscrizione…';btn.disabled=true;
+  try{
+    const res=await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,interesse})});
+    if(res.ok){
+      document.getElementById('emailForm').style.display='none';
+      document.querySelector('.note').style.display='none';
+      const s=document.getElementById('emailSuccess');s.style.display='block';
+      s.textContent=interesse==='app'
+        ? 'Perfetto — ti contattiamo presto per darti accesso. ✦'
+        : 'Perfetto — sei dentro. Ti aggiorniamo quando c\'è qualcosa di nuovo. ✦';
+    }else{btn.textContent='Riprova';btn.disabled=false;}
+  }catch(err){btn.textContent='Riprova';btn.disabled=false;}
+}
 </script>
-
 </body>
 </html>
