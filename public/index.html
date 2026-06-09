@@ -482,15 +482,16 @@ document.querySelectorAll('.mag').forEach(bn=>{
   bn.addEventListener('mouseleave',()=>bn.style.transform='');
 });
 
-/* ════ MARQUEE a velocità costante (skew rimosso: causava nausea allo scroll) ════ */
+/* ════ MARQUEE lento e costante, legato al tempo (non ai frame) ════ */
 const marq=document.getElementById('marq');
-let marqX=0;
-if(!REDUCED)(function tick(){
-  marqX-=0.5;
+let marqX=0,marqT=performance.now();
+if(!REDUCED)(function tick(now){
+  const dt=Math.min(now-marqT,100);marqT=now;
+  marqX-=dt*0.0035;               // ~3.5% al secondo: leggibile, niente vertigini
   if(marqX<=-50)marqX+=50;
   marq.style.transform=`translateX(${marqX}%)`;
   requestAnimationFrame(tick);
-})();
+})(marqT);
 
 /* ════ CARD TILT 3D ════ */
 const card=document.getElementById('card');
